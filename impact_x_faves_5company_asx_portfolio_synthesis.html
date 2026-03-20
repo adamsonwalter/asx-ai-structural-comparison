@@ -77,6 +77,7 @@ td.num{text-align:center;font-weight:600;font-family:'JetBrains Mono',monospace;
 .tab-btn{border-radius:6px!important;border-bottom:none!important;margin-bottom:0!important;padding:10px 18px!important;}
 .tab-btn:hover{background:rgba(0,0,0,0.05)!important;}
 .tab-btn.active{background:var(--charcoal,#1a1a1a)!important;color:#fff!important;border-bottom-color:transparent!important;}
+.help-link{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(29,78,216,0.1);color:#1d4ed8;font-size:11px;font-weight:700;text-decoration:none;margin-left:8px;vertical-align:middle;transition:all 0.2s;}.help-link:hover{background:#1d4ed8;color:#fff;}
 </style>
 <nav class="site-nav">
 <a href="/" class="site-nav-home">&larr; Home</a>
@@ -165,7 +166,7 @@ td.num{text-align:center;font-weight:600;font-family:'JetBrains Mono',monospace;
 
   <!-- CONSTRAINTS -->
   <div id="tab-constraints" class="tab-panel" style="display:none;">
-    <h2 class="section-title">The Constraint Ontology</h2>
+    <h2 class="section-title">The Constraint Ontology <a href="/guide#constraints" class="help-link" title="What are constraint types?">?</a></h2>
     <div class="callout insight"><h4>Four Binding Constraints</h4><p>Every company's AI exposure is shaped by its binding constraint — the structural factor that prevents automation regardless of AI capability. Understanding your constraint type determines strategic allocation between Operator, Fortress, and Escalation.</p></div>
     <div class="table-wrapper"><table><thead><tr><th>Constraint</th><th>Archetype</th><th>What Blocks Automation</th><th>FAVES Signature</th><th>Strategic Bias</th></tr></thead><tbody>
       <tr><td><span class="constraint-badge cb-atoms">Atoms</span></td><td>GenusPlus</td><td>Physical delivery — can't AI-pour concrete or pull cable</td><td>Low A (physical context), low V (field errors dangerous)</td><td>50% Fortress / 40% Escalate / 10% Operator</td></tr>

@@ -544,6 +544,7 @@ tr:hover td{background:rgba(29,78,216,0.03);}
 .tab-btn{border-radius:6px!important;border-bottom:none!important;margin-bottom:0!important;padding:10px 18px!important;}
 .tab-btn:hover{background:rgba(0,0,0,0.05)!important;}
 .tab-btn.active{background:var(--charcoal,#1a1a1a)!important;color:#fff!important;border-bottom-color:transparent!important;}
+.help-link{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(29,78,216,0.1);color:#1d4ed8;font-size:11px;font-weight:700;text-decoration:none;margin-left:8px;vertical-align:middle;transition:all 0.2s;}.help-link:hover{background:#1d4ed8;color:#fff;}
 </style>
 <nav class="site-nav">
 <a href="/" class="site-nav-home">&larr; Home</a>
@@ -611,7 +612,7 @@ tr:hover td{background:rgba(29,78,216,0.03);}
 
   <!-- ===== EXPOSURE TAB ===== -->
   <div id="tab-exposure" class="tab-panel active" role="tabpanel">
-    <h2 class="section-title">Executive Team Exposure Summary</h2>
+    <h2 class="section-title">Executive Team Exposure Summary <a href="/guide#quadrants" class="help-link" title="What do these quadrants mean?">?</a></h2>
     <div class="metric-grid">
       <div class="metric-card green"><div class="label">Automate Now</div><div class="value">4.0%</div><div class="sub">7 of 175 tasks</div></div>
       <div class="metric-card orange"><div class="label">Augment (Human + AI)</div><div class="value">60.0%</div><div class="sub">105 of 175 tasks</div></div>
@@ -859,7 +860,7 @@ tr:hover td{background:rgba(29,78,216,0.03);}
 
   <!-- ===== MATRIX TAB ===== -->
   <div id="tab-matrix" class="tab-panel" role="tabpanel" style="display:none;">
-    <h2 class="section-title">IMPACT × FAVES Decision Matrix</h2>
+    <h2 class="section-title">IMPACT × FAVES Decision Matrix <a href="/guide#matrix" class="help-link" title="How to read this chart">?</a></h2>
     <div class="role-selector" id="matrixRoleSelector">
       <div class="role-chip active" data-role="ALL">All Roles</div>
       <div class="role-chip" data-role="David Riches">David</div>
@@ -885,7 +886,7 @@ tr:hover td{background:rgba(29,78,216,0.03);}
 
   <!-- ===== RADAR TAB ===== -->
   <div id="tab-radar" class="tab-panel" role="tabpanel" style="display:none;">
-    <h2 class="section-title">FAVES Dimension Radar by Role</h2>
+    <h2 class="section-title">FAVES Dimension Radar by Role <a href="/guide#radar" class="help-link" title="How to read this chart">?</a></h2>
     <div class="role-selector" id="radarRoleSelector">
       <div class="role-chip active" data-role="David Riches">David</div>
       <div class="role-chip" data-role="Damian Wright">Damian</div>
@@ -912,7 +913,7 @@ tr:hover td{background:rgba(29,78,216,0.03);}
   <div id="tab-dynamics" class="tab-panel" role="tabpanel" style="display:none;">
     <h2 class="section-title">Systems Dynamics & Temporal Velocity</h2>
     
-    <h3 class="sub-title">Headcount Compression Model</h3>
+    <h3 class="sub-title">Headcount Compression Model <a href="/guide#scores" class="help-link" title="What is this?">?</a></h3>
     <div class="metric-grid">
       <div class="metric-card orange"><div class="label">David</div><div class="value">0.91x</div><div class="sub">Managing Director & CEO</div></div>
       <div class="metric-card orange"><div class="label">Damian</div><div class="value">0.88x</div><div class="sub">CFO & Joint Company Secretary</div></div>
@@ -937,7 +938,7 @@ tr:hover td{background:rgba(29,78,216,0.03);}
       <canvas id="adoptionGapChart" height="220"></canvas>
     </div>
 
-    <h3 class="sub-title">Deskilling Index</h3>
+    <h3 class="sub-title">Deskilling Index <a href="/guide#scores" class="help-link" title="What is this?">?</a></h3>
     <div class="card">
       <p>The deskilling index measures what proportion of each role's highest-value expert tasks fall in the Automate Now quadrant — indicating whether AI is consuming the complex work and leaving routine residue.</p>
       <div class="table-wrapper" style="margin-top:16px;">

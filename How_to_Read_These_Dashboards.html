@@ -109,6 +109,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
 .tab-btn{border-radius:6px!important;border-bottom:none!important;margin-bottom:0!important;padding:10px 18px!important;}
 .tab-btn:hover{background:rgba(0,0,0,0.05)!important;}
 .tab-btn.active{background:var(--charcoal,#1a1a1a)!important;color:#fff!important;border-bottom-color:transparent!important;}
+.help-link{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(29,78,216,0.1);color:#1d4ed8;font-size:11px;font-weight:700;text-decoration:none;margin-left:8px;vertical-align:middle;transition:all 0.2s;}.help-link:hover{background:#1d4ed8;color:#fff;}
 </style>
 <nav class="site-nav">
 <a href="/" class="site-nav-home">&larr; Home</a>
@@ -158,7 +159,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
 <div class="container">
 
   <!-- ===== SECTION 1: THE FOUR QUADRANTS ===== -->
-  <div class="section-num">01 — The four quadrants</div>
+  <div class="section-num" id="quadrants">01 — The four quadrants</div>
   <h2>What are we looking at?</h2>
   <p class="lead">Every executive task is scored on two axes — business case and technical feasibility — and placed in one of four quadrants.</p>
 
@@ -190,7 +191,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 2: THE TWO AXES ===== -->
-  <div class="section-num">02 — The two axes</div>
+  <div class="section-num" id="axes">02 — The two axes</div>
   <h2>IMPACT × FAVES</h2>
   <p class="lead">Most AI assessments produce one score per task. This framework produces two — because "should we automate this?" and "can AI actually do this?" are different questions.</p>
 
@@ -242,7 +243,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 3: THE SCORES ===== -->
-  <div class="section-num">03 — Reading the scores</div>
+  <div class="section-num" id="scores">03 — Reading the scores</div>
   <h2>What the numbers mean</h2>
   <p class="lead">Every dimension is scored 1-5. The composite is the average across all dimensions on that axis.</p>
 
@@ -280,7 +281,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 4: THE MATRIX SCATTER ===== -->
-  <div class="section-num">04 — The scatter plot</div>
+  <div class="section-num" id="matrix">04 — The scatter plot</div>
   <h2>Reading the IMPACT × FAVES matrix</h2>
   <p class="lead">Each dot is a task. Its position tells you what to do with it.</p>
 
@@ -308,7 +309,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 5: THE RADAR ===== -->
-  <div class="section-num">05 — The radar chart</div>
+  <div class="section-num" id="radar">05 — The radar chart</div>
   <h2>Reading the FAVES radar</h2>
   <p class="lead">Five spokes, one per FAVES dimension. A full, balanced pentagon means the role is highly automatable. A collapsed or lopsided shape tells you why it isn't.</p>
 
@@ -321,7 +322,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 6: CONSTRAINT TYPES ===== -->
-  <div class="section-num">06 — The five constraint types</div>
+  <div class="section-num" id="constraints">06 — The five constraint types</div>
   <h2>Why does exposure differ?</h2>
   <p class="lead">Every company's AI exposure is shaped by its binding constraint — the structural factor that prevents automation regardless of how good AI gets.</p>
 
@@ -343,7 +344,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 7: THE THREE STRATEGIES ===== -->
-  <div class="section-num">07 — The three strategic paths</div>
+  <div class="section-num" id="strategies">07 — The three strategic paths</div>
   <h2>What to do about it</h2>
   <p class="lead">Every company gets a recommended allocation across three paths. The mix depends on constraint type.</p>
 
@@ -368,7 +369,7 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
   <div class="divider"></div>
 
   <!-- ===== SECTION 8: QUICK REFERENCE ===== -->
-  <div class="section-num">08 — Quick reference</div>
+  <div class="section-num" id="glossary">08 — Quick reference</div>
   <h2>Glossary</h2>
   <p class="lead">For when you see a term on a dashboard and need a one-line answer.</p>
 
@@ -394,4 +395,24 @@ h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px
     100+ AI workflow solutions delivered | <a href="https://linkedin.com/in/adamson">linkedin.com/in/adamson</a> | <a href="mailto:walter@outcomesnow.com">walter@outcomesnow.com</a>
   </div>
 </div>
+<div id="backBtn" style="display:none;position:fixed;bottom:24px;right:24px;z-index:100;">
+  <a id="backLink" style="display:flex;align-items:center;gap:8px;padding:12px 24px;background:#1a1a1a;color:#fff;border-radius:8px;text-decoration:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.15);transition:background 0.2s;"
+     onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#1a1a1a'"
+  >&larr; Back to dashboard</a>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('backBtn');
+  var link=document.getElementById('backLink');
+  var ref=document.referrer;
+  try{
+    if(ref && new URL(ref).origin===location.origin && ref!==location.href){
+      btn.style.display='block';
+      link.onclick=function(){history.back();};
+    }
+  }catch(e){
+    // no referrer or invalid URL — hide button
+  }
+})();
+</script>
 </body></html>

@@ -131,6 +131,7 @@ tr:hover td{background:rgba(220,38,38,0.03);}
 .tab-btn{border-radius:6px!important;border-bottom:none!important;margin-bottom:0!important;padding:10px 18px!important;}
 .tab-btn:hover{background:rgba(0,0,0,0.05)!important;}
 .tab-btn.active{background:var(--charcoal,#1a1a1a)!important;color:#fff!important;border-bottom-color:transparent!important;}
+.help-link{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(29,78,216,0.1);color:#1d4ed8;font-size:11px;font-weight:700;text-decoration:none;margin-left:8px;vertical-align:middle;transition:all 0.2s;}.help-link:hover{background:#1d4ed8;color:#fff;}
 </style>
 <nav class="site-nav">
 <a href="/" class="site-nav-home">&larr; Home</a>
@@ -197,7 +198,7 @@ tr:hover td{background:rgba(220,38,38,0.03);}
 
   <!-- EXPOSURE -->
   <div id="tab-exposure" class="tab-panel active" role="tabpanel">
-    <h2 class="section-title">Executive Team Exposure Summary</h2>
+    <h2 class="section-title">Executive Team Exposure Summary <a href="/guide#quadrants" class="help-link" title="What do these quadrants mean?">?</a></h2>
     <div class="metric-grid">
       <div class="metric-card green"><div class="label">Automate Now</div><div class="value">4.1%</div><div class="sub">3 of 74 tasks</div></div>
       <div class="metric-card orange"><div class="label">Augment (Human + AI)</div><div class="value">63.5%</div><div class="sub">47 of 74 tasks</div></div>
@@ -257,7 +258,7 @@ tr:hover td{background:rgba(220,38,38,0.03);}
 
   <!-- MATRIX -->
   <div id="tab-matrix" class="tab-panel" style="display:none;">
-    <h2 class="section-title">IMPACT × FAVES Decision Matrix</h2>
+    <h2 class="section-title">IMPACT × FAVES Decision Matrix <a href="/guide#matrix" class="help-link" title="How to read this chart">?</a></h2>
     <div class="role-selector" id="matrixRoleSelector"><div class="role-chip active" data-role="ALL">All Roles</div><div class="role-chip" data-role="Brett Kelly">Brett</div><div class="role-chip" data-role="Kenneth Ko">Kenneth</div><div class="role-chip" data-role="Kristian Haigh">Kristian</div><div class="role-chip" data-role="Paul Kuchta">Paul</div><div class="role-chip" data-role="Ada Poon">Ada</div><div class="role-chip" data-role="Joyce Au">Joyce</div></div>
     <div class="chart-container wide" style="max-width:800px;"><canvas id="matrixScatterChart" height="320"></canvas></div>
     <div class="callout insight"><h4>The V-Score Wall</h4><p>Notice the vertical clustering around FAVES 2.0-3.0 despite high IMPACT scores — tasks are pulled leftward by the V dimension (consequence of error). In the scatter, the CFO's financial reporting tasks (top-right cluster) break through because consolidated Group reporting has higher verifiability (F=4-5) and lower personal liability risk than client-facing tax sign-offs. The practicing accountants (Kuchta, Poon) are locked in the top-left augment zone: massive business value, AI-ready on 4 of 5 FAVES dimensions, but the V-score cliff keeps them from Automate Now.</p></div>
@@ -265,7 +266,7 @@ tr:hover td{background:rgba(220,38,38,0.03);}
 
   <!-- RADAR -->
   <div id="tab-radar" class="tab-panel" style="display:none;">
-    <h2 class="section-title">FAVES Dimension Radar by Role</h2>
+    <h2 class="section-title">FAVES Dimension Radar by Role <a href="/guide#radar" class="help-link" title="How to read this chart">?</a></h2>
     <div class="role-selector" id="radarRoleSelector"><div class="role-chip active" data-role="Brett Kelly">Brett</div><div class="role-chip" data-role="Kenneth Ko">Kenneth</div><div class="role-chip" data-role="Kristian Haigh">Kristian</div><div class="role-chip" data-role="Paul Kuchta">Paul</div><div class="role-chip" data-role="Ada Poon">Ada</div><div class="role-chip" data-role="Joyce Au">Joyce</div></div>
     <div class="chart-container" style="max-width:500px;"><canvas id="radarChart" height="280"></canvas></div>
     <div class="callout warning"><h4>The Asymmetric FAVES Signature</h4><p>Kelly Partners shows the most lopsided FAVES radar in the portfolio. F (Fidelity), A (Autonomy), and S (Decomposability) score 3-5 across most tasks — the tax compliance workflow is highly structured, fully digital (Xero/MYOB), and breaks into verifiable steps. But V (Volatility of consequence) collapses to 1-2 because an incorrect tax return triggers ATO penalties, client financial harm, and potential professional deregistration. And E (Entanglement) is low because lodging requires authenticated access to ATO portals, client accounting systems, and practice management platforms. This lopsided pentagon — strong on three axes, collapsed on two — is the Institutional constraint's fingerprint.</p></div>
@@ -274,13 +275,13 @@ tr:hover td{background:rgba(220,38,38,0.03);}
   <!-- DYNAMICS -->
   <div id="tab-dynamics" class="tab-panel" style="display:none;">
     <h2 class="section-title">Systems Dynamics & Temporal Velocity</h2>
-    <h3 class="sub-title">Headcount Compression Model</h3>
+    <h3 class="sub-title">Headcount Compression Model <a href="/guide#scores" class="help-link" title="What is this?">?</a></h3>
     <div class="metric-grid"><div class="metric-card orange"><div class="label">Brett</div><div class="value">0.9x</div><div class="sub">Founder, Executive Chair </div></div><div class="metric-card red"><div class="label">Kenneth</div><div class="value">0.84x</div><div class="sub">Chief Financial Officer</div></div><div class="metric-card orange"><div class="label">Kristian</div><div class="value">0.91x</div><div class="sub">Chief Operating Officer</div></div><div class="metric-card orange"><div class="label">Paul</div><div class="value">0.9x</div><div class="sub">Executive Director & MD K</div></div><div class="metric-card green"><div class="label">Ada</div><div class="value">0.92x</div><div class="sub">Executive Director & Co-F</div></div><div class="metric-card green"><div class="label">Joyce</div><div class="value">0.94x</div><div class="sub">Group Company Secretary</div></div></div>
     <div class="callout success"><h4>Low Compression = High Professional Value</h4><p>All KPG executives show headcount multipliers between 0.84x and 0.94x — among the lowest compression in the 3-company portfolio. The CFO (Kenneth Ko) at 0.84x is the most exposed, consistent with the pattern seen at both GenusPlus and WiseTech (CFO functions are universally AI-exposed). The practicing accountants (Kuchta 0.90x, Poon 0.92x) show low compression despite their work being technically AI-feasible — the Institutional constraint creates a structural floor that technology alone cannot breach.</p></div>
     <h3 class="sub-title">Adoption Gap — Theoretical vs Practical</h3>
     <div class="chart-container wide"><canvas id="adoptionGapChart" height="220"></canvas></div>
     <div class="callout insight"><h4>Joyce Au's 90-Point Gap — The Governance Paradox</h4><p>The Group Company Secretary shows the largest adoption gap in the entire 3-company portfolio: 90% of tasks are theoretically feasible (FAVES ≥ 3.0), but 0% are in Automate Now. This is governance work — Board resolutions, ASX announcements, shareholder communications — where the task itself is structured and text-based (high F, A, S) but the consequence of error is existential (V=1 for ASX compliance). The gap will close only when regulatory frameworks evolve to accept AI-prepared governance documentation with human attestation, similar to how e-signatures displaced wet-ink requirements.</p></div>
-    <h3 class="sub-title">Deskilling Index</h3>
+    <h3 class="sub-title">Deskilling Index <a href="/guide#scores" class="help-link" title="What is this?">?</a></h3>
     <div class="card"><p>All KPG executive roles show a deskilling index of 0.0 — meaning <strong>zero</strong> of their highest-value expert tasks fall in the Automate Now quadrant. This is the starkest contrast with WiseTech (CFO 0.4, CTO 0.2) and confirms the Institutional constraint thesis: professional expertise remains fully protected by the liability wrapper. AI is not absorbing the complex accounting judgment — it is absorbing the routine preparation that surrounds it.</p></div>
   </div>
 
