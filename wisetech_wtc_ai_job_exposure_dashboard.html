@@ -1140,7 +1140,7 @@ setupRoleSelector("taskRoleSelector", renderTaskTable);
       {label:"Convenience",data:ROLES.map(function(r){return r.conv_pct;}),backgroundColor:chartColors.conv},
       {label:"Fortress",data:ROLES.map(function(r){return r.hf_pct;}),backgroundColor:chartColors.hf}
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{family:"DM Sans",size:10}}},y:{stacked:true,max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}}}}
+    options:{responsive:true,aspectRatio:2.2,plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{family:"DM Sans",size:10}}},y:{stacked:true,max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}}}}
   });
 })();
 
@@ -1150,7 +1150,7 @@ setupRoleSelector("taskRoleSelector", renderTaskTable);
   new Chart(ctx,{
     type:"doughnut",
     data:{labels:["Automate Now (9.9%)","Augment (58.5%)","Convenience (9.2%)","Fortress (22.5%)"],datasets:[{data:[9.9,58.5,9.2,22.5],backgroundColor:[chartColors.an,chartColors.aug,chartColors.conv,chartColors.hf],borderWidth:2,borderColor:"#f5f4f0"}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:"55%",plugins:{legend:{position:"bottom",labels:{font:{family:"DM Sans",size:12},padding:16}}}}
+    options:{responsive:true,aspectRatio:1.2,cutout:"55%",plugins:{legend:{position:"bottom",labels:{font:{family:"DM Sans",size:12},padding:16}}}}
   });
 })();
 
@@ -1167,7 +1167,7 @@ function drawMatrix(filter){
   });
   window._matrixChart = new Chart(ctx,{
     type:"scatter",data:{datasets:datasets},
-    options:{responsive:true,maintainAspectRatio:false,scales:{
+    options:{responsive:true,aspectRatio:1.2,scales:{
       x:{min:0,max:5.5,title:{display:true,text:"FAVES (Feasibility) →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}},
       y:{min:0,max:5.5,title:{display:true,text:"IMPACT (Business Case) →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}}
     },plugins:{tooltip:{callbacks:{label:function(ctx){return ctx.raw.label+" (I:"+ctx.raw.y.toFixed(1)+", F:"+ctx.raw.x.toFixed(1)+")";}}},legend:{position:"top",labels:{font:{family:"DM Sans",size:11}}}}}
@@ -1190,7 +1190,7 @@ function drawRadar(roleName){
     type:"radar",
     data:{labels:["Fidelity (F)","Autonomy (A)","Volatility (V)","Entanglement (E)","Decomposability (S)"],
     datasets:[{label:roleName,data:avgScores,backgroundColor:"rgba(139,92,246,0.15)",borderColor:"#8b5cf6",borderWidth:2,pointBackgroundColor:"#8b5cf6",pointRadius:5}]},
-    options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{family:"DM Sans",size:10}},pointLabels:{font:{family:"DM Sans",size:12,weight:"500"}},grid:{color:"#e5e5e5"}}},plugins:{legend:{display:true,labels:{font:{family:"DM Sans",size:12}}}}}
+    options:{responsive:true,aspectRatio:1,scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{family:"DM Sans",size:10}},pointLabels:{font:{family:"DM Sans",size:12,weight:"500"}},grid:{color:"#e5e5e5"}}},plugins:{legend:{display:true,labels:{font:{family:"DM Sans",size:12}}}}}
   });
 }
 setupRoleSelector("radarRoleSelector", drawRadar);
@@ -1205,7 +1205,7 @@ function drawAdoptionGap(){
       {label:"Theoretical Max (%)",data:ROLES.map(function(r){return r.theo_max;}),backgroundColor:"rgba(139,92,246,0.2)",borderColor:"#8b5cf6",borderWidth:2},
       {label:"Current Practical (%)",data:ROLES.map(function(r){return r.curr_prac;}),backgroundColor:"rgba(22,163,74,0.6)",borderColor:"#16a34a",borderWidth:2}
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},scales:{y:{max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}},x:{grid:{display:false},ticks:{font:{family:"DM Sans",size:10}}}}}
+    options:{responsive:true,aspectRatio:2,plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},scales:{y:{max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}},x:{grid:{display:false},ticks:{font:{family:"DM Sans",size:10}}}}}
   });
 }
 
@@ -1218,7 +1218,7 @@ function drawPortfolioBubble(){
   });
   new Chart(ctx,{
     type:"bubble",data:{datasets:datasets},
-    options:{responsive:true,maintainAspectRatio:false,scales:{
+    options:{responsive:true,aspectRatio:1.3,scales:{
       x:{min:1,max:4.5,title:{display:true,text:"Weighted FAVES →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}},
       y:{min:2.5,max:4.5,title:{display:true,text:"Weighted IMPACT →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}}
     },plugins:{
