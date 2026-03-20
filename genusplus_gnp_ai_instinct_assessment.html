@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Instinct Assessment — GenusPlus Group (ASX: GNP)</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --ivory: #f5f4f0;
+  --white: #ffffff;
+  --charcoal: #1a1a1a;
+  --noir: #0a0a0a;
+  --stone: #8a8680;
+  --border: #d8d4cc;
+  --accent: #d97706;
+  --accent-light: rgba(217,119,6,0.08);
+  --green: #16a34a;
+  --blue: #1d4ed8;
+  --red: #dc2626;
+  --purple: #8b5cf6;
+  --orange: #d97706;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--ivory);color:var(--charcoal);font-size:14px;line-height:1.7;}
+.header{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#92400e 100%);padding:60px 40px 50px;color:#fff;}
+.header .badge{display:inline-block;padding:6px 14px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);margin-bottom:16px;border:1px solid rgba(255,255,255,0.15);}
+.header h1{font-family:'Instrument Serif',serif;font-size:42px;font-weight:400;margin-bottom:8px;line-height:1.15;}
+.header .subtitle{font-size:18px;opacity:0.92;max-width:800px;font-weight:500;margin-bottom:6px;}
+.header p.desc{font-size:15px;opacity:0.75;max-width:800px;}
+.header .meta{margin-top:16px;font-size:12px;opacity:0.65;display:flex;gap:24px;flex-wrap:wrap;}
+.container{max-width:1280px;margin:0 auto;padding:40px 40px 60px;}
+.tab-nav{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:32px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:0;background:var(--ivory);z-index:10;padding-top:8px;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{padding:14px 20px;font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:500;color:var(--stone);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s;}
+.tab-btn:hover{color:var(--charcoal);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.tab-panel{animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+h2.section-title{font-family:'Instrument Serif',serif;font-size:28px;font-weight:400;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--accent);}
+h3.sub-title{font-family:'Instrument Serif',serif;font-size:20px;font-weight:400;margin:28px 0 14px;}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.metric-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:24px;text-align:center;}
+.metric-card .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--stone);margin-bottom:8px;}
+.metric-card .value{font-size:28px;font-weight:700;color:var(--charcoal);}
+.metric-card .sub{font-size:11px;color:var(--stone);margin-top:4px;}
+.metric-card.highlight-red .value{color:var(--red);}
+.metric-card.highlight-green .value{color:var(--green);}
+.metric-card.highlight-orange .value{color:var(--orange);}
+.metric-card.highlight-blue .value{color:var(--blue);}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:30px;margin-bottom:24px;}
+.card-emphasis{border-left:4px solid var(--accent);}
+.card-red{border-left:4px solid var(--red);}
+.card-green{border-left:4px solid var(--green);}
+.card-blue{border-left:4px solid var(--blue);}
+.note{background:rgba(217,119,6,0.06);border-left:4px solid var(--orange);padding:20px 24px;border-radius:0 8px 8px 0;margin:24px 0;}
+.note h4{color:var(--orange);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.recommendation{background:rgba(22,163,74,0.06);border-left:4px solid var(--green);padding:20px 24px;border-radius:0 8px 8px 0;margin:24px 0;}
+.recommendation h4{color:var(--green);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.danger{background:rgba(220,38,38,0.06);border-left:4px solid var(--red);padding:20px 24px;border-radius:0 8px 8px 0;margin:24px 0;}
+.danger h4{color:var(--red);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.highlight-box{background:rgba(29,78,216,0.06);border-left:4px solid var(--blue);padding:20px 24px;border-radius:0 8px 8px 0;margin:24px 0;}
+.highlight-box h4{color:var(--blue);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+thead{background:var(--charcoal);color:var(--white);}
+th{padding:14px 16px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+td{padding:12px 16px;border-top:1px solid var(--border);font-size:13px;color:#444;}
+tr:hover{background:rgba(217,119,6,0.03);}
+.chart-container{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:24px;margin:20px 0;position:relative;}
+.chart-container canvas{max-height:380px;}
+blockquote{font-family:'Instrument Serif',serif;font-size:20px;color:var(--charcoal);line-height:1.5;padding:20px 0 20px 24px;border-left:3px solid var(--accent);margin:28px 0;font-style:italic;}
+blockquote cite{display:block;font-family:'DM Sans',sans-serif;font-size:13px;font-style:normal;color:var(--stone);margin-top:8px;}
+.gap-bar{display:flex;height:28px;border-radius:4px;overflow:hidden;margin:8px 0 4px;font-size:11px;font-weight:600;}
+.gap-bar div{display:flex;align-items:center;justify-content:center;color:#fff;}
+.gap-bar .auto{background:#16a34a;}.gap-bar .aug{background:#d97706;}.gap-bar .conv{background:#6366f1;}.gap-bar .hf{background:#94a3b8;}
+.instinct-map{position:relative;width:100%;max-width:600px;margin:20px auto;aspect-ratio:1;border:2px solid var(--border);border-radius:8px;background:var(--white);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.step-number{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--accent);color:var(--white);border-radius:50%;font-family:'Instrument Serif',serif;font-weight:600;font-size:16px;margin-right:10px;flex-shrink:0;}
+.flow-step{display:flex;align-items:flex-start;margin-bottom:20px;}
+.flow-step .content{flex:1;}
+.flow-step .content h4{font-size:15px;font-weight:600;margin-bottom:4px;}
+.flow-step .content p{font-size:13px;color:#555;}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin:2px 4px 2px 0;}
+.tag-red{background:rgba(220,38,38,0.1);color:var(--red);}
+.tag-orange{background:rgba(217,119,6,0.1);color:var(--orange);}
+.tag-green{background:rgba(22,163,74,0.1);color:var(--green);}
+.tag-blue{background:rgba(29,78,216,0.1);color:var(--blue);}
+.tag-gray{background:rgba(100,116,139,0.1);color:#64748b;}
+.footer{background:var(--charcoal);color:rgba(255,255,255,0.6);padding:32px 40px;font-size:12px;line-height:1.7;}
+.footer a{color:rgba(255,255,255,0.8);text-decoration:none;}
+.footer a:hover{text-decoration:underline;}
+@media(max-width:1024px){.container{padding:40px 24px;}.header{padding:60px 24px 40px;}.header h1{font-size:36px;}.metric-grid{grid-template-columns:repeat(2,1fr);}.two-col{grid-template-columns:1fr;}}
+@media(max-width:640px){.container{padding:24px 16px;}.header{padding:40px 16px 32px;}.header h1{font-size:26px;}.header .subtitle{font-size:15px;}.metric-grid{grid-template-columns:1fr;}.card{padding:20px;}table{font-size:12px;}th,td{padding:10px 8px;}.tab-btn{padding:10px 14px;font-size:12px;}}
+@media print{.tab-panel{display:block !important;}.tab-nav{display:none;}.header{print-color-adjust:exact;-webkit-print-color-adjust:exact;}section{page-break-inside:avoid;}}
+</style>
+</head>
+<body>
+<!-- Site Navigation -->
+<style>
+.site-nav{display:flex;align-items:center;gap:20px;padding:10px 40px;background:#0a0a0a;font-family:'DM Sans',system-ui,sans-serif;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;}
+.site-nav-home{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:600;font-size:13px;padding:4px 0;white-space:nowrap;}
+.site-nav-home:hover{color:#fff;}
+.site-nav-sep{width:1px;height:20px;background:rgba(255,255,255,0.15);flex-shrink:0;}
+.site-nav-links{display:flex;gap:2px;flex-wrap:wrap;}
+.site-nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;padding:5px 12px;border-radius:4px;transition:color 0.2s,background 0.2s;white-space:nowrap;}
+.site-nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08);}
+.site-nav-links a.active{color:#fff;background:rgba(255,255,255,0.12);font-weight:600;}
+@media(max-width:640px){.site-nav{padding:8px 16px;gap:10px;}.site-nav-links a{padding:4px 8px;font-size:12px;}.site-nav-sep{display:none;}}
+@media print{.site-nav{display:none;}}
+</style>
+<nav class="site-nav">
+<a href="/" class="site-nav-home">&larr; Home</a>
+<div class="site-nav-sep"></div>
+<div class="site-nav-links">
+<a href="/portfolio">Synthesis</a>
+<a href="/genusplus">GenusPlus</a>
+<a href="/wisetech">WiseTech</a>
+<a href="/kellypartners">Kelly Partners</a>
+<a href="/csl">CSL</a>
+<a href="/seek">SEEK</a>
+<a href="/genusplus-instinct">GNP Instinct</a>
+</div>
+</nav>
+<script>
+(function(){
+  var p=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
+  var links=document.querySelectorAll('.site-nav-links a');
+  var map={
+    '/portfolio':0,'/impact_x_faves_5company_asx_portfolio_synthesis':0,
+    '/genusplus':1,'/genusplus_gnp_ai_job_exposure_dashboard':1,
+    '/wisetech':2,'/wisetech_wtc_ai_job_exposure_dashboard':2,
+    '/kellypartners':3,'/kellypartners_kpg_ai_job_exposure_dashboard':3,
+    '/csl':4,'/csl_csl_ai_job_exposure_dashboard':4,
+    '/seek':5,'/seek_sek_ai_job_exposure_dashboard':5,
+    '/genusplus-instinct':6,'/genusplus_gnp_ai_instinct_assessment':6
+  };
+  var idx=map[p];
+  if(idx!==undefined&&links[idx])links[idx].classList.add('active');
+  var home=document.querySelector('.site-nav-home');
+  if(p===''||p==='/contrast-map'||p==='/asx_ai_exposure_portfolio_contrast_map'){
+    home.innerHTML='\u25CF Home';home.style.fontWeight='700';
+  }
+})();
+</script>
+<!-- End Site Navigation -->
+
+
+<div class="header">
+  <div class="badge">AI Instinct Assessment</div>
+  <h1>The Readiness Illusion</h1>
+  <p class="subtitle">Why GenusPlus Group's 60% AI-Augmentable C-Suite Hides a 51% Completeness Gap That No Model Upgrade Will Fix</p>
+  <p class="desc">An AI Instinct Consultant assessment — mapping where AI output is correct but incomplete, identifying dead work, and exposing the judgment architecture gap between impressive capability and reliable operations.</p>
+  <div class="meta">
+    <span>GenusPlus Group Limited (ASX: GNP)</span>
+    <span>A$751M Revenue · 1,178 Employees · ~A$1.2B Market Cap</span>
+    <span>Power & Communications Infrastructure</span>
+    <span>March 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab(event,'tab-exec')">Executive Summary</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(event,'tab-gap')">Completeness Gap</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(event,'tab-dead')">Dead Work</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(event,'tab-roles')">Role Analysis</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(event,'tab-instinct')">Instinct Gap Map</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab(event,'tab-plan')">Judgment Architecture</button>
+</nav>
+
+<!-- ============ TAB 1: EXECUTIVE SUMMARY ============ -->
+<div id="tab-exec" class="tab-panel active" role="tabpanel">
+<h2 class="section-title">Executive Summary</h2>
+
+<blockquote>
+"AI simplifies more than it hallucinates. It gives you a perfectly accurate answer to 40% of the problem and presents it as the whole picture."
+<cite>— The Completeness Reframe</cite>
+</blockquote>
+
+<p style="font-size:15px;margin-bottom:24px;">GenusPlus Group's executive team manages 175 distinct high-stakes tasks across 11 C-suite and senior leadership roles. Task-level analysis using the IMPACT×FAVES dual-axis framework reveals a pattern that should concern every board considering AI acceleration: <strong>the company looks AI-ready on paper while carrying a structural judgment gap that no model upgrade will close.</strong></p>
+
+<div class="metric-grid">
+  <div class="metric-card highlight-orange">
+    <div class="label">Augment-Zone Tasks</div>
+    <div class="value">60%</div>
+    <div class="sub">105 of 175 tasks</div>
+  </div>
+  <div class="metric-card highlight-red">
+    <div class="label">Can't Verify AI Output</div>
+    <div class="value">51%</div>
+    <div class="sub">54 of 105 augment tasks</div>
+  </div>
+  <div class="metric-card highlight-blue">
+    <div class="label">Avg Adoption Gap</div>
+    <div class="value">32.6 pts</div>
+    <div class="sub">Range: 10 – 75 pts</div>
+  </div>
+  <div class="metric-card highlight-green">
+    <div class="label">Current AI Practical</div>
+    <div class="value">3.9%</div>
+    <div class="sub">Weighted average</div>
+  </div>
+</div>
+
+<div class="danger">
+<h4>The Core Finding</h4>
+<p>GenusPlus has <strong>105 tasks where AI can augment human judgment</strong> — but in 54 of those tasks (51%), the AI output <strong>cannot be independently verified</strong> (FAVES Verification score ≤ 1). This means the organisation would be deploying AI assistance into workflows where nobody can reliably check whether the output is complete. The AI will produce confident, accurate, well-formatted answers — that are correct about 40–65% of the full requirement.</p>
+</div>
+
+<div class="recommendation">
+<h4>What This Means for the Board</h4>
+<p>The question isn't "should we deploy AI?" — it's "do we have the judgment systems to know when AI output is complete?" Right now, GenusPlus doesn't. And the highest-consequence tasks — tender strategy, contract negotiation, workforce mobilisation, major project delivery — are exactly where verification is weakest. The instinct that experienced operators carry for catching incomplete human work hasn't been calibrated for AI output. Building that calibration takes weeks, not years — but it must happen before AI deployment, not after.</p>
+</div>
+
+<h3 class="sub-title">The Structural Paradox</h3>
+<p style="margin-bottom:16px;">This analysis reveals a pattern that repeats across every industrial mid-market company we've assessed:</p>
+
+<div class="two-col">
+<div class="card card-emphasis">
+<h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">What the Vendor Pitch Says</h4>
+<p style="font-size:13px;">60% of your C-suite tasks are AI-augmentable. Theoretical maximum automation: 38%. You're sitting on hundreds of hours of recoverable time. Deploy AI copilots across all functions and watch productivity soar.</p>
+</div>
+<div class="card card-red">
+<h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">What the Completeness Audit Shows</h4>
+<p style="font-size:13px;">Your most consequential tasks — where the dollars, safety, and regulatory exposure live — have the lowest verification scores. AI will produce beautiful output that is correct but incomplete. Without a judgment layer, your team will act on it. The errors won't look like errors. They'll look like well-researched recommendations with missing context.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ============ TAB 2: COMPLETENESS GAP ============ -->
+<div id="tab-gap" class="tab-panel" role="tabpanel" style="display:none;">
+<h2 class="section-title">The Completeness Gap Map</h2>
+
+<p style="font-size:15px;margin-bottom:24px;">Every task in the augment zone was scored across two dimensions: how much <strong>business impact</strong> it carries (IMPACT composite) and how <strong>technically feasible</strong> it is for AI to handle (FAVES composite). The completeness gap lives where these two dimensions diverge — high impact, but the output can't be verified, decomposed, or separated from entangled human processes.</p>
+
+<div class="chart-container">
+<canvas id="gapScatter" height="380"></canvas>
+</div>
+
+<h3 class="sub-title">The Verification Blind Spot</h3>
+
+<div class="metric-grid">
+  <div class="metric-card highlight-red">
+    <div class="label">Unverifiable Augment Tasks</div>
+    <div class="value">54</div>
+    <div class="sub">V-score ≤ 1 of 5</div>
+  </div>
+  <div class="metric-card highlight-orange">
+    <div class="label">Low Decomposability</div>
+    <div class="value">36</div>
+    <div class="sub">Can't break into AI subtasks</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">High Entanglement</div>
+    <div class="value">13</div>
+    <div class="sub">Coupled to other systems/people</div>
+  </div>
+  <div class="metric-card highlight-green">
+    <div class="label">Verifiable + Decomposable</div>
+    <div class="value">15</div>
+    <div class="sub">The safe starting zone</div>
+  </div>
+</div>
+
+<div class="danger">
+<h4>What 51% Unverifiable Means In Practice</h4>
+<p>When an AI copilot drafts a tender strategy review, it will produce a confident analysis that covers the obvious commercial angles. What it won't flag: the relationship history with that specific utility client, the operational constraint from concurrent mobilisation on two other sites, or the award wage implication of the proposed crew structure. These omissions aren't errors — they're simplifications. The AI pattern-matched toward the most probable answer, not the most complete one. A senior commercial manager would catch these in 30 seconds reviewing a human's draft. But they haven't built the instinct to catch them in AI output — because AI output doesn't show where it stopped thinking.</p>
+</div>
+
+<h3 class="sub-title">Highest-Risk Tasks: High Impact, Low Verification</h3>
+<div class="table-wrapper">
+<table>
+<thead><tr><th>Role</th><th>Task</th><th>IMPACT</th><th>FAVES V-Score</th><th>Risk</th></tr></thead>
+<tbody>
+<tr><td>EGM - Industrial</td><td>Lead D&C and EPC project delivery</td><td>4.33</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>COO</td><td>Oversee Group operational delivery</td><td>4.33</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>COO</td><td>Lead workforce mobilisation — transmission</td><td>4.33</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>GM HR/IR</td><td>Lead enterprise bargaining and unions</td><td>4.33</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>EGM - Telecoms</td><td>Lead telecoms division delivery</td><td>4.33</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>General Counsel</td><td>Draft/review construction & EPC contracts</td><td>4.50</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>EGM - Commercial</td><td>Review commercial terms on tenders</td><td>4.50</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>EGM - Commercial</td><td>Manage variation & EOT claims</td><td>4.50</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>COO</td><td>Manage major project escalations</td><td>4.17</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+<tr><td>CEO</td><td>Negotiate major client contracts</td><td>4.00</td><td>1</td><td><span class="tag tag-red">Critical</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<h4>The Pattern</h4>
+<p>The 10 tasks with the highest IMPACT scores across GenusPlus all have Verification scores of 1 out of 5. This is not a coincidence. High-consequence tasks are high-consequence precisely <em>because</em> they require judgment that can't be independently verified through output inspection alone. The consequence lives in what's NOT in the output — the missing context, the omitted constraint, the relationship nuance that only experience surfaces.</p>
+</div>
+
+</div>
+
+<!-- ============ TAB 3: DEAD WORK ============ -->
+<div id="tab-dead" class="tab-panel" role="tabpanel" style="display:none;">
+<h2 class="section-title">The Elimination Pass</h2>
+
+<blockquote>
+"Before asking 'what should we automate?' ask 'what should we stop doing entirely?'"
+<cite>— Peter Drucker, Systematic Abandonment</cite>
+</blockquote>
+
+<p style="font-size:15px;margin-bottom:24px;">The Drucker Inversion identifies work that should be eliminated before any technology touches it. Automating a bad process makes it a faster bad process. GenusPlus has a relatively lean convenience pool (only 5 tasks / 2.9%) — but the real dead work hides inside the 60% augmentation zone as <strong>preparation and assembly work that experienced executives do manually because no judgment system exists yet.</strong></p>
+
+<h3 class="sub-title">Convenience Pool — Eliminate or Fully Automate</h3>
+<div class="table-wrapper">
+<table>
+<thead><tr><th>Role</th><th>Task</th><th>Weekly %</th><th>Recommendation</th></tr></thead>
+<tbody>
+<tr><td>CFO</td><td>Manage share registry and equity-related admin</td><td>3%</td><td><span class="tag tag-green">Full Automation</span></td></tr>
+<tr><td>General Counsel</td><td>Draft Board resolutions and corporate actions</td><td>4%</td><td><span class="tag tag-green">Template + Auto-Draft</span></td></tr>
+<tr><td>EGM Commercial</td><td>Develop standard form contracts and playbooks</td><td>3%</td><td><span class="tag tag-blue">Single Source of Truth</span></td></tr>
+<tr><td>EGM Corp Services</td><td>Prepare corporate services reports to ExCo</td><td>5%</td><td><span class="tag tag-green">Full Automation</span></td></tr>
+<tr><td>GM SHEQ</td><td>Prepare Board SHEQ reports and dashboards</td><td>4%</td><td><span class="tag tag-green">Full Automation</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub-title">Hidden Dead Work: The Automate-Now Cluster</h3>
+<p style="margin-bottom:16px;">Seven tasks across two roles score high enough on both IMPACT and FAVES to move to full automation immediately. These tasks are high-frequency, highly decomposable, rule-governed, and low-entanglement. They represent the "easy wins" — but they're concentrated in just two roles:</p>
+
+<div class="two-col">
+<div class="card card-green">
+<h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Mike Green — EGM Corporate Services</h4>
+<p style="font-size:13px;margin-bottom:8px;">4 tasks ready for immediate automation:</p>
+<p style="font-size:12px;color:#555;">• Group finance, accounting and reporting<br>
+• Budget management for corporate functions<br>
+• Month-end close and management reporting<br>
+• Accounts payable/receivable operations</p>
+<p style="font-size:12px;margin-top:8px;color:var(--green);font-weight:600;">Combined weekly time: 29% of role · Adoption gap: 46.6 pts</p>
+</div>
+<div class="card card-green">
+<h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Damian Wright — CFO</h4>
+<p style="font-size:13px;margin-bottom:8px;">2 tasks ready for immediate automation:</p>
+<p style="font-size:12px;color:#555;">• Budgeting and variance analysis across segments<br>
+• Segment reporting and intercompany reconciliations</p>
+<p style="font-size:12px;margin-top:8px;color:var(--green);font-weight:600;">Combined weekly time: 12% of role · Adoption gap: 75.0 pts</p>
+</div>
+</div>
+
+<div class="note">
+<h4>The Drucker Test</h4>
+<p>These 12 tasks (convenience + automate-now) represent work that is either unnecessary or can run without human judgment. Eliminating or automating them recovers an estimated <strong>54 hours per month across the leadership team</strong> at zero technology risk — because these tasks have high decomposability, high data availability, and low consequence-of-error. This is the only place to start. Every other AI initiative depends on freeing this capacity first.</p>
+</div>
+
+<h3 class="sub-title">The Kira McNeill Signal</h3>
+<div class="card card-emphasis">
+<p style="font-size:13px;">The GM SHEQ role has 53.3% of tasks in the Human Fortress quadrant and only 33.3% in Augment. This is the correct pattern for a safety-critical function. However, the single "Automate Now" task — <em>safety performance reporting and analytics</em> — is exactly where AI should start in SHEQ: assembling data, not making safety judgments. The completion gap risk in SHEQ isn't automation — it's that AI might produce safety reports that look comprehensive but miss the site-specific risk factors that experienced safety professionals carry as instinct. Build the judgment layer here before expanding.</p>
+</div>
+
+</div>
+
+<!-- ============ TAB 4: ROLE ANALYSIS ============ -->
+<div id="tab-roles" class="tab-panel" role="tabpanel" style="display:none;">
+<h2 class="section-title">Role-by-Role Completeness Analysis</h2>
+
+<p style="font-size:15px;margin-bottom:24px;">Each role is mapped by the proportion of time spent in each quadrant — and the size of the adoption gap between theoretical AI capability and current practical deployment.</p>
+
+<div class="chart-container">
+<canvas id="adoptionGapChart" height="300"></canvas>
+</div>
+
+<h3 class="sub-title">The Adoption Gap Tells the Real Story</h3>
+
+<div class="table-wrapper">
+<table>
+<thead><tr><th>Role</th><th>Aug %</th><th>HF %</th><th>Auto %</th><th>Gap (pts)</th><th>Binding Constraint</th></tr></thead>
+<tbody>
+<tr><td><strong>CFO — Damian Wright</strong></td><td>60%</td><td>25%</td><td>10%</td><td style="color:var(--red);font-weight:700;">75.0</td><td><span class="tag tag-red">Highest gap in organisation</span></td></tr>
+<tr><td>General Counsel — Strati Gregoriadis</td><td>60%</td><td>33%</td><td>0%</td><td style="color:var(--red);font-weight:700;">46.7</td><td><span class="tag tag-orange">Contract completeness</span></td></tr>
+<tr><td>EGM Corp Services — Mike Green</td><td>13%</td><td>53%</td><td>27%</td><td style="color:var(--orange);font-weight:700;">46.6</td><td><span class="tag tag-orange">Already automating</span></td></tr>
+<tr><td>GM HR/IR — Jane Carr</td><td>47%</td><td>53%</td><td>0%</td><td style="color:var(--orange);font-weight:700;">40.0</td><td><span class="tag tag-orange">Award wage complexity</span></td></tr>
+<tr><td>GM SHEQ — Kira McNeill</td><td>33%</td><td>53%</td><td>7%</td><td>33.3</td><td><span class="tag tag-gray">Safety-critical judgment</span></td></tr>
+<tr><td>EGM Commercial — Hasan Murad</td><td>80%</td><td>13%</td><td>0%</td><td>26.7</td><td><span class="tag tag-orange">Contract verification</span></td></tr>
+<tr><td>EGM Industrial — Kevin Arnold</td><td>73%</td><td>27%</td><td>0%</td><td>20.0</td><td><span class="tag tag-gray">Atoms — field delivery</span></td></tr>
+<tr><td>EGM Telecoms — Stewart Furness</td><td>73%</td><td>27%</td><td>0%</td><td>20.0</td><td><span class="tag tag-gray">Atoms — field delivery</span></td></tr>
+<tr><td>COO — David Fyfe</td><td>73%</td><td>27%</td><td>0%</td><td>20.0</td><td><span class="tag tag-gray">Atoms — field delivery</span></td></tr>
+<tr><td>EGM — George Lloyd</td><td>80%</td><td>20%</td><td>0%</td><td>20.0</td><td><span class="tag tag-gray">Atoms — field delivery</span></td></tr>
+<tr><td>CEO — David Riches</td><td>65%</td><td>35%</td><td>0%</td><td style="color:var(--green);font-weight:600;">10.0</td><td><span class="tag tag-green">Judgment-first role</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="highlight-box">
+<h4>The CFO Paradox</h4>
+<p>Damian Wright's role has the largest adoption gap in the entire leadership team (75 points) — and simultaneously the highest concentration of tasks where AI <em>could</em> theoretically act autonomously. The CFO function has abundant structured data, clear rules, and high decomposability. This looks like the obvious place to start. <strong>It's a trap.</strong> The CFO's highest-impact tasks — cash flow forecasting, financial modelling for tenders, M&A evaluation — carry IMPACT scores above 4.0 but Verification scores of 1-2. AI will produce beautiful financial models that miss the construction-specific cost assumptions, the mobilisation timing dependencies, or the WHS compliance cost implications that an experienced CFO catches reflexively. Start with the automated tasks (budgeting, segment reporting). Build the completeness audit layer on those first. Only then move to the high-stakes augmentation tasks.</p>
+</div>
+
+<h3 class="sub-title">Quadrant Distribution by Role</h3>
+<div class="chart-container">
+<canvas id="roleStackChart" height="300"></canvas>
+</div>
+
+</div>
+
+<!-- ============ TAB 5: INSTINCT GAP MAP ============ -->
+<div id="tab-instinct" class="tab-panel" role="tabpanel" style="display:none;">
+<h2 class="section-title">The Instinct Gap Map</h2>
+
+<p style="font-size:15px;margin-bottom:24px;">The Instinct Gap Map positions an organisation on two axes: AI Capability (how much AI is deployed) and Human Judgment Calibration (how well-organised the oversight is). Most companies — including GenusPlus — sit in the bottom-right quadrant: powerful tools available, no calibrated oversight for checking whether AI output is complete.</p>
+
+<div class="chart-container" style="min-height:450px;">
+<canvas id="instinctMap" height="420"></canvas>
+</div>
+
+<div class="two-col" style="margin-top:24px;">
+<div class="card card-red">
+<h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Forces Keeping You in Bottom-Right</h4>
+<p style="font-size:13px;line-height:1.7;"><strong>Confidence without calibration.</strong> AI output looks professional. Teams stop questioning it. Completeness gaps become invisible through familiarity.<br><br>
+<strong>Scar tissue from failures.</strong> When incomplete output causes damage, the response is "AI doesn't work here" — not "we need better judgment." Resistance calcifies.<br><br>
+<strong>Intuitive Genius walks out the door.</strong> Experienced operators retire, quit, or go on leave. Their undocumented trade-off rules leave with them. New staff inherit the tools without the judgment.</p>
+</div>
+<div class="card card-green">
+<h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">Forces That Compound Toward Top-Right</h4>
+<p style="font-size:13px;line-height:1.7;"><strong>Judgment compounds.</strong> Each workflow with an active completeness audit makes the team better at spotting gaps in other workflows. Organised instinct spreads.<br><br>
+<strong>Architecture locks in.</strong> Single source of truth architecture becomes the operational nervous system. Switching cost is institutional knowledge. 3–5 year retention advantage.<br><br>
+<strong>Trust compounds.</strong> Each successful project builds on the last. In credence goods markets, trust is the currency. Early movers accumulate it exponentially.</p>
+</div>
+</div>
+
+<div class="note">
+<h4>GenusPlus Current Position</h4>
+<p>GenusPlus sits at the border of bottom-left and bottom-right. AI capability is available (frontier models accessible, theoretical augmentation of 60% of C-suite tasks identified) but practical deployment is at 3.9% weighted average. Judgment calibration is near zero — no systematic framework for evaluating AI output completeness exists. <strong>The journey is bottom-right → top-right. The mechanism is: completeness audit → intent engineering → judgment architecture → organised instinct.</strong></p>
+</div>
+
+</div>
+
+<!-- ============ TAB 6: JUDGMENT ARCHITECTURE ============ -->
+<div id="tab-plan" class="tab-panel" role="tabpanel" style="display:none;">
+<h2 class="section-title">Judgment Architecture Plan</h2>
+
+<p style="font-size:15px;margin-bottom:24px;">This plan builds the judgment layer that makes AI output safe to act on. It starts with elimination (zero technology risk), moves to low-stakes automation, then builds completeness audits on the workflows where the gap between impressive output and reliable output matters most.</p>
+
+<div class="flow-step">
+<span class="step-number">0</span>
+<div class="content">
+<h4>This Week: Kill the Dead Work</h4>
+<p>Eliminate or fully automate the 5 convenience-pool tasks and 7 automate-now tasks. These require no judgment layer — they're rule-governed, decomposable, and the consequence of imperfect output is low. Estimated recovery: <strong>54 hours/month</strong> at $0 technology cost (existing tools). This is a structural prerequisite — it frees attention capacity for the judgment work that follows.</p>
+</div>
+</div>
+
+<div class="flow-step">
+<span class="step-number">1</span>
+<div class="content">
+<h4>Weeks 1–2: CFO Financial Reporting Judgment Layer</h4>
+<p><strong>Why here:</strong> Largest adoption gap (75 pts). Highest data availability. Structured input/output. Build the Plan-Evaluate-Patch methodology on budgeting and segment reporting first (already automate-ready), then extend to cash flow forecasting and tender modelling with a completeness audit layer. Extract the 3–5 trade-off rules Damian Wright applies reflexively when reviewing financial models (e.g., "mobilisation costs always lag the schedule by 2 weeks" or "never price a WA transmission job using NSW crew rates").</p>
+<p style="margin-top:8px;"><span class="tag tag-orange">Champion: Damian Wright</span> <span class="tag tag-blue">Architecture: Single Source of Truth document per workflow</span></p>
+</div>
+</div>
+
+<div class="flow-step">
+<span class="step-number">2</span>
+<div class="content">
+<h4>Weeks 3–4: Commercial Contract Completeness Audit</h4>
+<p><strong>Why here:</strong> EGM Commercial (Hasan Murad) has 80% augment-zone tasks but 0% current automation — the role is almost entirely judgment-dependent. Contract review, variation claims, and EOT management are where AI output carries the highest dollar exposure. Build the completeness audit layer for construction contracts: the checklist of "things AI will confidently omit" (latent conditions clauses, delay damages caps specific to utility clients, principal-supplied materials risk allocation). This becomes the template for all commercial AI-assisted work.</p>
+<p style="margin-top:8px;"><span class="tag tag-orange">Champion: Hasan Murad</span> <span class="tag tag-red">Completeness audit: EPC/D&C contract specifics</span></p>
+</div>
+</div>
+
+<div class="flow-step">
+<span class="step-number">3</span>
+<div class="content">
+<h4>Weeks 5–6: SHEQ Reporting + Incident Investigation Judgment Layer</h4>
+<p><strong>Why here:</strong> Safety performance reporting is already automate-ready (FAVES 3.6). Incident investigation requires deep judgment but follows a structured methodology (root cause analysis, causal trees). Build the judgment layer that catches the completeness gap in incident reports: AI will produce a well-structured 5-Why analysis but miss the site-specific contributing factors that experienced SHEQ professionals flag from pattern recognition across multiple incidents. This is where Intuitive Genius → Organised Genius matters most — because the consequence of incomplete safety analysis is injury or death.</p>
+<p style="margin-top:8px;"><span class="tag tag-orange">Champion: Kira McNeill</span> <span class="tag tag-red">Safety-critical: completeness audit mandatory</span></p>
+</div>
+</div>
+
+<div class="flow-step">
+<span class="step-number">4</span>
+<div class="content">
+<h4>Month 2+: Extend to Operations and Legal</h4>
+<p>With the judgment architecture proven on Finance, Commercial, and SHEQ, extend to COO project delivery briefings, General Counsel contract review, and HR enterprise bargaining preparation. Each follows the same pattern: identify the completeness gap, extract the trade-off rules, build the Plan-Evaluate-Patch layer, anchor to a single source of truth document. By this point, the methodology is learned — the team builds their own judgment layers.</p>
+</div>
+</div>
+
+<h3 class="sub-title">Outcome Summary</h3>
+
+<div class="metric-grid">
+  <div class="metric-card highlight-green">
+    <div class="label">Hours Recovered (Month 1)</div>
+    <div class="value">54</div>
+    <div class="sub">Dead work elimination only</div>
+  </div>
+  <div class="metric-card highlight-blue">
+    <div class="label">Completeness Audits Built</div>
+    <div class="value">3</div>
+    <div class="sub">Finance, Commercial, SHEQ</div>
+  </div>
+  <div class="metric-card highlight-orange">
+    <div class="label">Trade-Off Rules Encoded</div>
+    <div class="value">15–20</div>
+    <div class="sub">Currently undocumented</div>
+  </div>
+  <div class="metric-card highlight-green">
+    <div class="label">Timeline to Operational</div>
+    <div class="value">6 wks</div>
+    <div class="sub">First 3 workflows live</div>
+  </div>
+</div>
+
+<div class="recommendation">
+<h4>Architecture Principle</h4>
+<p>Every judgment layer built in this plan uses <strong>Single Source of Truth architecture</strong>: the document the team approves IS the artifact that governs the AI system. One file to update. When the team changes the document, the AI's behaviour updates automatically. Zero version drift. Vendor-independent. When the next model ships, the business updates one file and the system adapts. No retraining. No pipeline rebuilds. The judgment layer persists regardless of which model sits underneath.</p>
+</div>
+
+<div class="highlight-box">
+<h4>The Binding Constraint</h4>
+<p>GenusPlus is an Atoms-dominant business — physical infrastructure delivery creates 90%+ of value. This means the binding constraint on AI deployment is not technology capability but <strong>field verification</strong>. The C-suite can augment their analysis, reporting, and decision preparation with AI — but the outputs feed into physical operations where a completeness gap becomes a safety incident, a contractual exposure, or a mobilisation failure. The judgment architecture must be built from this reality: AI assists the thinking, humans verify the completeness, and the verification rules are encoded so they persist when experienced operators leave.</p>
+</div>
+
+</div>
+
+</div><!-- end container -->
+
+<div class="footer">
+<p>© 2026 Walter Adamson | BHP 20 years, Head IT Audit · IT Strategy · Corporate Planning · International Bus Development | 100+ AI workflow solutions delivered | <a href="https://linkedin.com/in/adamson">linkedin.com/in/adamson</a> | <a href="mailto:walter@outcomesnow.com">walter@outcomesnow.com</a></p>
+<p style="margin-top:8px;">AI Instinct Consultant assessment based on IMPACT×FAVES task-level analysis. Source data: GenusPlus Group AI Job Exposure Dashboard (March 2026). This assessment maps where AI output creates invisible completeness gaps — it is not a technology recommendation or vendor evaluation.</p>
+</div>
+
+<script>
+function switchTab(event, tabId) {
+  document.querySelectorAll('.tab-panel').forEach(p => { p.style.display = 'none'; p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+  document.getElementById(tabId).style.display = 'block';
+  document.getElementById(tabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+  event.currentTarget.setAttribute('aria-selected', 'true');
+  document.querySelector('.tab-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Gap Scatter Chart
+(function(){
+  var ctx = document.getElementById('gapScatter');
+  if(!ctx) return;
+  
+  var tasks = [
+    // High impact, low FAVES (danger zone)
+    {x:1.8,y:4.33,label:'Lead D&C delivery',r:8,cat:'danger'},
+    {x:1.8,y:4.33,label:'Oversee Group ops',r:8,cat:'danger'},
+    {x:1.8,y:4.33,label:'Workforce mobilisation',r:8,cat:'danger'},
+    {x:1.4,y:4.33,label:'Enterprise bargaining',r:8,cat:'danger'},
+    {x:1.8,y:4.33,label:'Lead telecoms delivery',r:8,cat:'danger'},
+    {x:2.8,y:4.5,label:'Draft EPC contracts',r:7,cat:'danger'},
+    {x:2.6,y:4.5,label:'Review tender terms',r:7,cat:'danger'},
+    {x:2.8,y:4.5,label:'Variation/EOT claims',r:7,cat:'danger'},
+    {x:2.0,y:4.17,label:'Contract negotiation',r:7,cat:'danger'},
+    {x:1.6,y:4.17,label:'Project escalations',r:7,cat:'danger'},
+    // High impact, high FAVES (safe zone)
+    {x:3.6,y:4.33,label:'Budgeting & variance',r:7,cat:'safe'},
+    {x:3.4,y:4.33,label:'Cash flow forecasting',r:7,cat:'safe'},
+    {x:3.4,y:4.33,label:'Financial modelling',r:7,cat:'safe'},
+    {x:4.0,y:3.83,label:'Segment reporting',r:6,cat:'safe'},
+    {x:3.6,y:4.0,label:'Month-end close',r:6,cat:'safe'},
+    // Medium zone
+    {x:2.2,y:4.17,label:'Tender strategy',r:6,cat:'medium'},
+    {x:2.2,y:4.0,label:'SHEQ system',r:6,cat:'medium'},
+    {x:2.2,y:4.0,label:'Critical risk framework',r:6,cat:'medium'},
+    {x:3.0,y:3.83,label:'Internal audits (SHEQ)',r:6,cat:'medium'},
+    {x:2.4,y:4.33,label:'Tender technical review',r:6,cat:'medium'},
+  ];
+  
+  new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      datasets: [
+        {label:'High Risk: V ≤ 1',data:tasks.filter(t=>t.cat==='danger'),backgroundColor:'rgba(220,38,38,0.25)',borderColor:'#dc2626',borderWidth:2},
+        {label:'Medium Risk',data:tasks.filter(t=>t.cat==='medium'),backgroundColor:'rgba(217,119,6,0.25)',borderColor:'#d97706',borderWidth:2},
+        {label:'Safe Starting Zone',data:tasks.filter(t=>t.cat==='safe'),backgroundColor:'rgba(22,163,74,0.25)',borderColor:'#16a34a',borderWidth:2}
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x:{min:1,max:4.5,title:{display:true,text:'FAVES Composite (Technical Feasibility) →',font:{family:'DM Sans',size:13,weight:'600'}},grid:{color:'#e5e5e5'}},
+        y:{min:3.5,max:4.7,title:{display:true,text:'IMPACT Composite (Business Consequence) →',font:{family:'DM Sans',size:13,weight:'600'}},grid:{color:'#e5e5e5'}}
+      },
+      plugins:{
+        tooltip:{callbacks:{label:function(ctx){return ctx.raw.label+' (I:'+ctx.raw.y+', F:'+ctx.raw.x+')';}}},
+        legend:{position:'top',labels:{font:{family:'DM Sans',size:12}}}
+      }
+    }
+  });
+})();
+
+// Adoption Gap Chart
+(function(){
+  var ctx = document.getElementById('adoptionGapChart');
+  if(!ctx) return;
+  var roles = ['CFO','GenCounsel','Corp Svcs','HR/IR','SHEQ','Commercial','Industrial','Telecoms','COO','EGM','CEO'];
+  var theoMax = [85,46.7,73.3,40,40,26.7,20,20,20,20,10];
+  var currPrac = [10,0,26.7,0,6.7,0,0,0,0,0,0];
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:roles,
+      datasets:[
+        {label:'Theoretical Max (%)',data:theoMax,backgroundColor:'rgba(29,78,216,0.2)',borderColor:'#1d4ed8',borderWidth:2},
+        {label:'Current Practical (%)',data:currPrac,backgroundColor:'rgba(22,163,74,0.6)',borderColor:'#16a34a',borderWidth:2}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'top',labels:{font:{family:'DM Sans',size:12}}}},
+      scales:{y:{max:100,ticks:{callback:function(v){return v+'%';},font:{family:'DM Sans',size:11}},grid:{color:'#e5e5e5'}},x:{grid:{display:false},ticks:{font:{family:'DM Sans',size:10}}}}
+    }
+  });
+})();
+
+// Role Stack Chart
+(function(){
+  var ctx = document.getElementById('roleStackChart');
+  if(!ctx) return;
+  var roles = ['CEO','CFO','EGM','GenCounsel','COO','Commercial','Corp Svcs','SHEQ','HR/IR','Industrial','Telecoms'];
+  var autoNow = [0,10,0,0,0,0,26.7,6.7,0,0,0];
+  var augment = [65,60,80,60,73.3,80,13.3,33.3,46.7,73.3,73.3];
+  var conv = [0,5,0,6.7,0,6.7,6.7,6.7,0,0,0];
+  var hf = [35,25,20,33.3,26.7,13.3,53.3,53.3,53.3,26.7,26.7];
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:roles,
+      datasets:[
+        {label:'Automate Now',data:autoNow,backgroundColor:'#16a34a'},
+        {label:'Augment Zone',data:augment,backgroundColor:'#d97706'},
+        {label:'Convenience',data:conv,backgroundColor:'#6366f1'},
+        {label:'Human Fortress',data:hf,backgroundColor:'#94a3b8'}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'top',labels:{font:{family:'DM Sans',size:11}}}},
+      scales:{y:{stacked:true,max:100,ticks:{callback:function(v){return v+'%';},font:{family:'DM Sans',size:11}},grid:{color:'#e5e5e5'}},x:{stacked:true,grid:{display:false},ticks:{font:{family:'DM Sans',size:10}}}}
+    }
+  });
+})();
+
+// Instinct Gap Map — custom plugin draws quadrant lines, labels, and arrow directly on canvas
+var instinctQuadrantPlugin = {
+  id: 'instinctQuadrants',
+  afterDraw: function(chart) {
+    var ctx = chart.ctx;
+    var xScale = chart.scales.x;
+    var yScale = chart.scales.y;
+    var midXpx = xScale.getPixelForValue(2.5);
+    var midYpx = yScale.getPixelForValue(2.5);
+    var left = xScale.left, right = xScale.right, top = yScale.top, bottom = yScale.bottom;
+
+    // Dashed quadrant lines
+    ctx.save();
+    ctx.setLineDash([6,4]);
+    ctx.strokeStyle = '#d8d4cc';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(midXpx, top); ctx.lineTo(midXpx, bottom); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(left, midYpx); ctx.lineTo(right, midYpx); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Quadrant labels
+    ctx.textAlign = 'center';
+    ctx.font = '600 13px "DM Sans", sans-serif';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText('Not Started', xScale.getPixelForValue(1.25), yScale.getPixelForValue(1.25));
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 12px "DM Sans", sans-serif';
+    ctx.fillText('Judgment exists,', xScale.getPixelForValue(1.25), yScale.getPixelForValue(3.9));
+    ctx.fillText('tools underdeployed', xScale.getPixelForValue(1.25), yScale.getPixelForValue(3.9) + 16);
+
+    ctx.fillStyle = '#dc2626';
+    ctx.font = '600 12px "DM Sans", sans-serif';
+    ctx.fillText('MOST COMPANIES', xScale.getPixelForValue(3.75), yScale.getPixelForValue(1.15));
+    ctx.font = '500 11px "DM Sans", sans-serif';
+    ctx.fillText('(Powerful tools,', xScale.getPixelForValue(3.75), yScale.getPixelForValue(1.15) + 16);
+    ctx.fillText('no calibrated oversight)', xScale.getPixelForValue(3.75), yScale.getPixelForValue(1.15) + 30);
+
+    ctx.fillStyle = '#16a34a';
+    ctx.font = '700 13px "DM Sans", sans-serif';
+    ctx.fillText('THE TARGET', xScale.getPixelForValue(3.75), yScale.getPixelForValue(4.55));
+    ctx.font = '600 12px "DM Sans", sans-serif';
+    ctx.fillText('Organised Instinct', xScale.getPixelForValue(3.75), yScale.getPixelForValue(4.55) + 18);
+
+    // Dashed arrow from current → target
+    var ax1 = xScale.getPixelForValue(2.0), ay1 = yScale.getPixelForValue(1.0);
+    var ax2 = xScale.getPixelForValue(4.0), ay2 = yScale.getPixelForValue(4.0);
+    ctx.setLineDash([8,4]);
+    ctx.strokeStyle = '#16a34a';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(ax1, ay1); ctx.lineTo(ax2, ay2); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Arrowhead
+    var angle = Math.atan2(ay2 - ay1, ax2 - ax1);
+    var headLen = 12;
+    ctx.fillStyle = '#16a34a';
+    ctx.beginPath();
+    ctx.moveTo(ax2, ay2);
+    ctx.lineTo(ax2 - headLen * Math.cos(angle - Math.PI/6), ay2 - headLen * Math.sin(angle - Math.PI/6));
+    ctx.lineTo(ax2 - headLen * Math.cos(angle + Math.PI/6), ay2 - headLen * Math.sin(angle + Math.PI/6));
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+  }
+};
+
+(function(){
+  var ctx = document.getElementById('instinctMap');
+  if(!ctx) return;
+  new Chart(ctx, {
+    type:'scatter',
+    plugins: [instinctQuadrantPlugin],
+    data:{
+      datasets:[
+        {label:'GenusPlus — Current',data:[{x:1.8,y:0.8}],backgroundColor:'rgba(220,38,38,0.8)',borderColor:'#dc2626',borderWidth:3,pointRadius:14,pointStyle:'circle'},
+        {label:'Target Position',data:[{x:4.2,y:4.2}],backgroundColor:'rgba(22,163,74,0.3)',borderColor:'#16a34a',borderWidth:3,pointRadius:14,pointStyle:'star',pointRotation:0},
+        {label:'Most Companies',data:[{x:3.2,y:1.0},{x:3.8,y:0.6},{x:2.8,y:0.8},{x:3.5,y:1.2}],backgroundColor:'rgba(148,163,184,0.4)',borderColor:'#94a3b8',borderWidth:1,pointRadius:6}
+      ]
+    },
+    options:{
+      responsive:true,
+      aspectRatio:1.4,
+      scales:{
+        x:{min:0,max:5,title:{display:true,text:'AI Capability →',font:{family:'DM Sans',size:14,weight:'600'}},grid:{color:'#e5e5e5'},ticks:{display:false}},
+        y:{min:0,max:5,title:{display:true,text:'Human Judgment Calibration →',font:{family:'DM Sans',size:14,weight:'600'}},grid:{color:'#e5e5e5'},ticks:{display:false}}
+      },
+      plugins:{
+        legend:{position:'top',labels:{font:{family:'DM Sans',size:12}}},
+        tooltip:{callbacks:{label:function(ctx){
+          var labels = {
+            'GenusPlus — Current':'High tools available, near-zero calibration',
+            'Target Position':'AI deployed + organised instinct operational',
+            'Most Companies':'Powerful tools, uncalibrated oversight'
+          };
+          return ctx.dataset.label+': '+(labels[ctx.dataset.label]||'');
+        }}}
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

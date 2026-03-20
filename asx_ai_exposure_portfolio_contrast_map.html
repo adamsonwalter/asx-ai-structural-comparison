@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASX AI Exposure Portfolio Contrast Map — IMPACT × FAVES</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #f5f4f0;
+  --white: #ffffff;
+  --charcoal: #1a1a1a;
+  --noir: #0a0a0a;
+  --stone: #8a8680;
+  --border: #d8d4cc;
+  --accent: #1d4ed8;
+  --green: #16a34a;
+  --orange: #d97706;
+  --red: #dc2626;
+  --purple: #8b5cf6;
+  --quad-an: #16a34a;
+  --quad-aug: #d97706;
+  --quad-conv: #6366f1;
+  --quad-hf: #64748b;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); color:var(--charcoal); font-size:14px; line-height:1.6; }
+.header { background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#1d4ed8 100%); padding:48px 40px 40px; color:#fff; }
+.header .badge { display:inline-block; padding:6px 14px; border-radius:4px; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.9); margin-bottom:14px; border:1px solid rgba(255,255,255,0.15); }
+.header h1 { font-family:'Instrument Serif',serif; font-size:38px; font-weight:400; margin-bottom:8px; line-height:1.15; }
+.header p { font-size:15px; opacity:0.85; max-width:800px; }
+.container { max-width:960px; margin:0 auto; padding:36px 40px 60px; }
+.legend { display:flex; gap:20px; flex-wrap:wrap; font-size:13px; color:var(--stone); margin:0 0 20px; }
+.legend span { display:flex; align-items:center; gap:6px; }
+.legend span::before { content:''; display:inline-block; width:12px; height:12px; border-radius:3px; }
+.l-an::before { background:var(--quad-an); }
+.l-aug::before { background:var(--quad-aug); }
+.l-conv::before { background:var(--quad-conv); }
+.l-hf::before { background:var(--quad-hf); }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:0 0 28px; }
+.co { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:20px 24px; transition:border-color 0.2s, box-shadow 0.2s; }
+.co:hover { border-color:var(--accent); box-shadow:0 2px 12px rgba(29,78,216,0.08); }
+.co.anchor { border:2px solid var(--accent); }
+.co.full { grid-column:1 / -1; }
+.co h3 { font-family:'Instrument Serif',serif; font-size:20px; font-weight:400; margin:0 0 2px; }
+.co .ticker { font-size:12px; color:var(--accent); font-weight:600; margin:0 0 10px; }
+.co .desc { font-size:13px; color:var(--stone); margin:0 0 14px; line-height:1.55; }
+.co .bar { display:flex; height:10px; border-radius:5px; overflow:hidden; margin:0 0 8px; }
+.co .bar span { display:block; }
+.co .stats { display:flex; justify-content:space-between; font-size:12px; color:var(--stone); }
+.badge-tag { display:inline-block; font-size:11px; font-weight:600; padding:4px 10px; border-radius:4px; margin:0 6px 10px 0; text-transform:uppercase; letter-spacing:0.3px; }
+.b-atoms { background:rgba(217,119,6,0.1); color:#b45309; }
+.b-bits { background:rgba(29,78,216,0.1); color:#1d4ed8; }
+.b-inst { background:rgba(220,38,38,0.1); color:#dc2626; }
+.b-cog { background:rgba(22,163,74,0.1); color:#16a34a; }
+.callout { padding:20px 24px; border-radius:8px; margin:24px 0; border-left:4px solid var(--accent); background:rgba(29,78,216,0.04); }
+.callout h4 { font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--accent); margin-bottom:6px; }
+.callout p { font-size:13px; line-height:1.6; color:var(--charcoal); }
+.section-title { font-family:'Instrument Serif',serif; font-size:26px; font-weight:400; margin:32px 0 16px; padding-bottom:10px; border-bottom:2px solid var(--accent); }
+.rationale { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:20px 24px; margin:0 0 16px; }
+.rationale h4 { font-size:14px; font-weight:600; margin:0 0 6px; }
+.rationale p { font-size:13px; color:var(--stone); line-height:1.55; }
+.footer { text-align:center; padding:36px; font-size:12px; color:var(--stone); border-top:1px solid var(--border); margin-top:36px; line-height:1.8; }
+.footer a { color:var(--accent); text-decoration:none; }
+
+@media(max-width:700px) {
+  .container { padding:24px 16px; }
+  .header { padding:32px 16px; }
+  .header h1 { font-size:28px; }
+  .grid { grid-template-columns:1fr; }
+}
+@media print {
+  .header { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+</head>
+<body>
+<!-- Site Navigation -->
+<style>
+.site-nav{display:flex;align-items:center;gap:20px;padding:10px 40px;background:#0a0a0a;font-family:'DM Sans',system-ui,sans-serif;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;}
+.site-nav-home{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:600;font-size:13px;padding:4px 0;white-space:nowrap;}
+.site-nav-home:hover{color:#fff;}
+.site-nav-sep{width:1px;height:20px;background:rgba(255,255,255,0.15);flex-shrink:0;}
+.site-nav-links{display:flex;gap:2px;flex-wrap:wrap;}
+.site-nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;padding:5px 12px;border-radius:4px;transition:color 0.2s,background 0.2s;white-space:nowrap;}
+.site-nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08);}
+.site-nav-links a.active{color:#fff;background:rgba(255,255,255,0.12);font-weight:600;}
+@media(max-width:640px){.site-nav{padding:8px 16px;gap:10px;}.site-nav-links a{padding:4px 8px;font-size:12px;}.site-nav-sep{display:none;}}
+@media print{.site-nav{display:none;}}
+</style>
+<nav class="site-nav">
+<a href="/" class="site-nav-home">&larr; Home</a>
+<div class="site-nav-sep"></div>
+<div class="site-nav-links">
+<a href="/portfolio">Synthesis</a>
+<a href="/genusplus">GenusPlus</a>
+<a href="/wisetech">WiseTech</a>
+<a href="/kellypartners">Kelly Partners</a>
+<a href="/csl">CSL</a>
+<a href="/seek">SEEK</a>
+<a href="/genusplus-instinct">GNP Instinct</a>
+</div>
+</nav>
+<script>
+(function(){
+  var p=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
+  var links=document.querySelectorAll('.site-nav-links a');
+  var map={
+    '/portfolio':0,'/impact_x_faves_5company_asx_portfolio_synthesis':0,
+    '/genusplus':1,'/genusplus_gnp_ai_job_exposure_dashboard':1,
+    '/wisetech':2,'/wisetech_wtc_ai_job_exposure_dashboard':2,
+    '/kellypartners':3,'/kellypartners_kpg_ai_job_exposure_dashboard':3,
+    '/csl':4,'/csl_csl_ai_job_exposure_dashboard':4,
+    '/seek':5,'/seek_sek_ai_job_exposure_dashboard':5,
+    '/genusplus-instinct':6,'/genusplus_gnp_ai_instinct_assessment':6
+  };
+  var idx=map[p];
+  if(idx!==undefined&&links[idx])links[idx].classList.add('active');
+  var home=document.querySelector('.site-nav-home');
+  if(p===''||p==='/contrast-map'||p==='/asx_ai_exposure_portfolio_contrast_map'){
+    home.innerHTML='\u25CF Home';home.style.fontWeight='700';
+  }
+})();
+</script>
+<!-- End Site Navigation -->
+
+
+<div class="header">
+  <div class="badge">AI JOB EXPOSURE — PORTFOLIO CONTRAST MAP</div>
+  <h1>ASX AI Exposure Portfolio: 6-Company Contrast Set</h1>
+  <p>Maximum spread across the Bits / Atoms / Institutional / Cognitive constraint surface — designed to illustrate the full range of generative AI executive exposure across Australian listed companies.</p>
+</div>
+
+<div class="container">
+
+  <div class="legend">
+    <span class="l-an">Automate now</span>
+    <span class="l-aug">Augment</span>
+    <span class="l-conv">Convenience</span>
+    <span class="l-hf">Human fortress</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="co anchor full">
+      <span class="badge-tag b-atoms">Atoms-dominant</span>
+      <h3>GenusPlus Group</h3>
+      <p class="ticker">ASX: GNP &middot; A$751M rev &middot; Power &amp; comms infrastructure</p>
+      <p class="desc">The anchor. Physical delivery of transmission lines, substations, fibre networks. C-suite is 60% augment, 4% automate. AI blocked by Atoms (field delivery) + Institutional (ASX continuous disclosure, WHS regulation, award wage complexity). Headcount compression among the lowest in the set.</p>
+      <div class="bar">
+        <span style="width:4%;background:var(--quad-an);"></span>
+        <span style="width:60%;background:var(--quad-aug);"></span>
+        <span style="width:3%;background:var(--quad-conv);"></span>
+        <span style="width:33%;background:var(--quad-hf);"></span>
+      </div>
+      <div class="stats"><span>AN: 4.0%</span><span>AUG: 60.0%</span><span>CONV: 2.9%</span><span>HF: 33.1%</span><span>HC: 0.90x</span></div>
+    </div>
+
+    <div class="co">
+      <span class="badge-tag b-bits">Bits-dominant</span>
+      <h3>WiseTech Global</h3>
+      <p class="ticker">ASX: WTC &middot; ~A$1.5B rev &middot; Logistics SaaS</p>
+      <p class="desc">Maximum Bits contrast. Pure software — CargoWise platform, 3,600 employees, 30%+ R&amp;D spend. C-suite tasks are document-in/document-out. Recently announced 2,000 AI-linked job cuts — proving the exposure is already being acted on. Highest predicted automate-now percentage in the set.</p>
+      <div class="bar">
+        <span style="width:40%;background:var(--quad-an);"></span>
+        <span style="width:30%;background:var(--quad-aug);"></span>
+        <span style="width:10%;background:var(--quad-conv);"></span>
+        <span style="width:20%;background:var(--quad-hf);"></span>
+      </div>
+      <div class="stats"><span>AN: ~40%</span><span>AUG: ~30%</span><span>CONV: ~10%</span><span>HF: ~20%</span><span>HC: ~0.68x</span></div>
+    </div>
+
+    <div class="co">
+      <span class="badge-tag b-cog">Cognitive-dominant</span>
+      <h3>SEEK Limited</h3>
+      <p class="ticker">ASX: SEK &middot; ~A$1.1B rev &middot; Employment marketplace</p>
+      <p class="desc">Cognitive constraint contrast. Two-sided marketplace where matching algorithms are Bits but the value chain is Cognitive — employer relationships, sales judgment, market positioning. AI can generate listings and parse resumes at scale; the hiring decision and enterprise sales relationship remain structural fortress. Distinctive split profile.</p>
+      <div class="bar">
+        <span style="width:28%;background:var(--quad-an);"></span>
+        <span style="width:38%;background:var(--quad-aug);"></span>
+        <span style="width:8%;background:var(--quad-conv);"></span>
+        <span style="width:26%;background:var(--quad-hf);"></span>
+      </div>
+      <div class="stats"><span>AN: ~28%</span><span>AUG: ~38%</span><span>CONV: ~8%</span><span>HF: ~26%</span><span>HC: ~0.75x</span></div>
+    </div>
+
+    <div class="co">
+      <span class="badge-tag b-inst">Institutional-dominant</span>
+      <h3>Kelly Partners Group</h3>
+      <p class="ticker">ASX: KPG &middot; ~A$180M rev &middot; Accounting roll-up</p>
+      <p class="desc">Institutional constraint contrast. Professional services (tax, audit, advisory) bound by CPA licensing, ATO compliance, and fiduciary duty. AI can draft returns and parse financials — but signing off carries personal legal liability under the Corporations Act. Most unusual FAVES signature: high on every dimension except V (consequence), which drags the entire profile into Augment.</p>
+      <div class="bar">
+        <span style="width:22%;background:var(--quad-an);"></span>
+        <span style="width:48%;background:var(--quad-aug);"></span>
+        <span style="width:5%;background:var(--quad-conv);"></span>
+        <span style="width:25%;background:var(--quad-hf);"></span>
+      </div>
+      <div class="stats"><span>AN: ~22%</span><span>AUG: ~48%</span><span>CONV: ~5%</span><span>HF: ~25%</span><span>HC: ~0.78x</span></div>
+    </div>
+
+    <div class="co">
+      <span class="badge-tag b-atoms">Atoms + Institutional</span>
+      <h3>CSL Limited</h3>
+      <p class="ticker">ASX: CSL &middot; ~US$14B rev &middot; Biotech / plasma</p>
+      <p class="desc">Dual Atoms+Institutional constraint. Plasma collection is irreducibly physical (human donors, fractionation plants). Drug approval is irreducibly institutional (TGA, FDA, EMA). R&amp;D and commercial functions are heavily Cognitive and partially Bits-automatable. Bimodal distribution: half fortress (manufacturing, regulatory), half augment (R&amp;D, commercial strategy). Closest to GenusPlus in shape but for structurally different reasons.</p>
+      <div class="bar">
+        <span style="width:12%;background:var(--quad-an);"></span>
+        <span style="width:42%;background:var(--quad-aug);"></span>
+        <span style="width:4%;background:var(--quad-conv);"></span>
+        <span style="width:42%;background:var(--quad-hf);"></span>
+      </div>
+      <div class="stats"><span>AN: ~12%</span><span>AUG: ~42%</span><span>CONV: ~4%</span><span>HF: ~42%</span><span>HC: ~0.88x</span></div>
+    </div>
+
+    <div class="co">
+      <span class="badge-tag b-bits">Bits + Cognitive</span>
+      <h3>Xero Limited</h3>
+      <p class="ticker">ASX: XRO &middot; ~A$2.1B rev &middot; Cloud accounting SaaS</p>
+      <p class="desc">Bits+Cognitive contrast. Product is pure software serving 4M+ SME subscribers — but the moat is the ecosystem lock-in and the partner accountant network, which is a relationship asset, not a code asset. Engineering tasks are highly automatable (WiseTech-like) but product strategy and ecosystem management are Cognitive fortress. High deskilling profile: AI eats the engineering, leaves the strategy.</p>
+      <div class="bar">
+        <span style="width:32%;background:var(--quad-an);"></span>
+        <span style="width:35%;background:var(--quad-aug);"></span>
+        <span style="width:8%;background:var(--quad-conv);"></span>
+        <span style="width:25%;background:var(--quad-hf);"></span>
+      </div>
+      <div class="stats"><span>AN: ~32%</span><span>AUG: ~35%</span><span>CONV: ~8%</span><span>HF: ~25%</span><span>HC: ~0.72x</span></div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Portfolio Design Rationale</h2>
+
+  <div class="callout">
+    <h4>Constraint Ontology: Bits / Atoms / Institutional / Cognitive</h4>
+    <p>The portfolio is constructed to place one company in each primary constraint quadrant, with two hybrid positions (CSL = Atoms+Institutional, Xero = Bits+Cognitive) that demonstrate how real companies sit on the constraint surface rather than at its poles. GenusPlus anchors the Atoms pole. WiseTech anchors the Bits pole. Kelly Partners anchors the Institutional pole. SEEK anchors the Cognitive pole. The result is maximum visual contrast when the quadrant distribution bars are displayed side by side.</p>
+  </div>
+
+  <div class="rationale">
+    <h4>Why WiseTech (not another SaaS company)?</h4>
+    <p>WiseTech's AI-linked 2,000 job-cut announcement makes it the most empirically validated Bits-pole company on the ASX. The exposure isn't theoretical — management is already acting on it. This gives the portfolio a "proved, not predicted" data point that strengthens the entire narrative.</p>
+  </div>
+
+  <div class="rationale">
+    <h4>Why Kelly Partners (not a Big 4 or a law firm)?</h4>
+    <p>KPG is the only pure-play ASX-listed accounting practice, which isolates the Institutional constraint cleanly. A law firm (if one were listed) would work equally well, but KPG's roll-up model (37 practices, 600+ staff) provides enough scale for meaningful C-suite task analysis. The CPA signing liability creates a V-score cliff that no amount of AI capability can overcome without regulatory change — this is the cleanest illustration of Institutional constraint on the ASX.</p>
+  </div>
+
+  <div class="rationale">
+    <h4>Why CSL and not another physical manufacturer?</h4>
+    <p>CSL combines Atoms (plasma fractionation is chemistry + logistics, not software) with extreme Institutional constraint (TGA/FDA drug approval is multi-year, irreducible). This dual-constraint profile is structurally similar to GenusPlus (which combines Atoms with ASX/WHS institutional constraints) but operates in a completely different sector — making the "same shape, different reasons" comparison visually and analytically compelling.</p>
+  </div>
+
+  <div class="rationale">
+    <h4>Why SEEK at the Cognitive pole?</h4>
+    <p>SEEK's C-suite is uniquely split: the platform/product side is Bits-automatable (matching algorithms, listing generation, analytics), but the enterprise sales and employer relationship side is pure Cognitive fortress. This creates the most distinctive bimodal task distribution in the portfolio — and illustrates why single-axis AI exposure scores fail when the business model straddles constraint categories.</p>
+  </div>
+
+  <div class="callout">
+    <h4>Portfolio Reading Order</h4>
+    <p>For maximum narrative impact, present the portfolio in this sequence: GenusPlus (anchor, lowest exposure) → CSL (similar shape, different sector) → Kelly Partners (Institutional cliff) → SEEK (Cognitive split) → Xero (Bits emerging) → WiseTech (Bits proven, cuts announced). This walks the audience from "AI can't touch us" to "AI is already restructuring headcount" in six steps.</p>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 Walter Adamson | BHP 20 years, Head IT Audit &bull; IT Strategy &bull; Corporate Planning &bull; International Bus Development<br>
+    100+ AI workflow solutions delivered | <a href="https://linkedin.com/in/adamson">linkedin.com/in/adamson</a> | <a href="mailto:walter@outcomesnow.com">walter@outcomesnow.com</a>
+  </div>
+
+</div>
+</body>
+</html>

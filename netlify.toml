@@ -1,0 +1,49 @@
+[build]
+  publish = "."
+
+# Homepage — contrast map is the landing page
+[[redirects]]
+  from = "/"
+  to = "/asx_ai_exposure_portfolio_contrast_map.html"
+  status = 200
+
+# Clean URL rewrites (200 = content served at short path, URL stays clean)
+[[redirects]]
+  from = "/portfolio"
+  to = "/impact_x_faves_5company_asx_portfolio_synthesis.html"
+  status = 200
+
+[[redirects]]
+  from = "/contrast-map"
+  to = "/asx_ai_exposure_portfolio_contrast_map.html"
+  status = 200
+
+[[redirects]]
+  from = "/genusplus"
+  to = "/genusplus_gnp_ai_job_exposure_dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/genusplus-instinct"
+  to = "/genusplus_gnp_ai_instinct_assessment.html"
+  status = 200
+
+[[redirects]]
+  from = "/wisetech"
+  to = "/wisetech_wtc_ai_job_exposure_dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/kellypartners"
+  to = "/kellypartners_kpg_ai_job_exposure_dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/csl"
+  to = "/csl_csl_ai_job_exposure_dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/seek"
+  to = "/seek_sek_ai_job_exposure_dashboard.html"
+  status = 200

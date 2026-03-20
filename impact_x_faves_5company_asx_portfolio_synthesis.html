@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Executive Exposure — 5-Company ASX Portfolio Synthesis | IMPACT x FAVES</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--ivory:#f5f4f0;--white:#fff;--charcoal:#1a1a1a;--noir:#0a0a0a;--stone:#8a8680;--border:#d8d4cc;--green:#16a34a;--orange:#d97706;--red:#dc2626;--purple:#8b5cf6;--blue:#1d4ed8;--teal:#0d7377;--burnt:#c2410c;--quad-an:#16a34a;--quad-aug:#d97706;--quad-conv:#6366f1;--quad-hf:#64748b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--ivory);color:var(--charcoal);font-size:14px;line-height:1.6;}
+.header{background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 40%,#2d2d2d 100%);padding:64px 48px 56px;color:#fff;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:0;right:0;width:400px;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(139,92,246,0.08) 50%,rgba(29,78,216,0.06) 100%);pointer-events:none;}
+.header .badge{display:inline-block;padding:6px 14px;border-radius:4px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);margin-bottom:20px;border:1px solid rgba(255,255,255,0.1);}
+.header h1{font-family:'Instrument Serif',serif;font-size:46px;font-weight:400;margin-bottom:12px;line-height:1.1;}
+.header h1 span{color:rgba(255,255,255,0.5);}
+.header p{font-size:17px;opacity:0.75;max-width:700px;line-height:1.5;}
+.header .hero-stats{display:flex;gap:48px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);}
+.header .hero-stat .num{font-size:36px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.header .hero-stat .lbl{font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
+.container{max-width:1200px;margin:0 auto;padding:48px 48px 60px;}
+.tab-nav{display:flex;border-bottom:2px solid var(--border);margin-bottom:36px;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;background:var(--ivory);z-index:10;padding-top:8px;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{padding:14px 24px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--stone);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s;}
+.tab-btn:hover{color:var(--charcoal);}
+.tab-btn.active{color:var(--charcoal);border-bottom-color:var(--charcoal);font-weight:600;}
+.tab-panel{animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+h2.section-title{font-family:'Instrument Serif',serif;font-size:30px;font-weight:400;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--charcoal);}
+h3.sub-title{font-family:'Instrument Serif',serif;font-size:21px;font-weight:400;margin:28px 0 14px;}
+.metric-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+.metric-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px 16px;text-align:center;}
+.metric-card .label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--stone);margin-bottom:6px;}
+.metric-card .value{font-size:28px;font-weight:700;line-height:1.2;}
+.metric-card .sub{font-size:11px;color:var(--stone);margin-top:4px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:28px;margin-bottom:20px;}
+.card-emphasis{border-left:4px solid var(--charcoal);}
+.callout{padding:20px 24px;border-radius:8px;margin:20px 0;border-left:4px solid;}
+.callout.insight{background:rgba(29,78,216,0.05);border-left-color:var(--blue);}
+.callout.warning{background:rgba(217,119,6,0.05);border-left-color:var(--orange);}
+.callout.success{background:rgba(22,163,74,0.05);border-left-color:var(--green);}
+.callout.critical{background:rgba(220,38,38,0.05);border-left-color:var(--red);}
+.callout h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.callout.insight h4{color:var(--blue);}.callout.warning h4{color:var(--orange);}.callout.success h4{color:var(--green);}.callout.critical h4{color:var(--red);}
+.callout p{font-size:14px;line-height:1.65;}
+.table-wrapper{overflow-x:auto;margin:16px 0;}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:13px;}
+thead{background:var(--charcoal);color:#fff;}
+th{padding:12px 14px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;white-space:nowrap;}
+td{padding:11px 14px;border-top:1px solid var(--border);}
+tr:hover td{background:rgba(0,0,0,0.015);}
+td.num{text-align:center;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:13px;}
+.constraint-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;}
+.cb-atoms{background:rgba(29,78,216,0.1);color:#1d4ed8;}.cb-bits{background:rgba(139,92,246,0.1);color:#8b5cf6;}.cb-inst{background:rgba(220,38,38,0.1);color:#dc2626;}.cb-dual{background:rgba(13,115,119,0.1);color:#0d7377;}.cb-cog{background:rgba(194,65,12,0.1);color:#c2410c;}
+.chart-container{position:relative;width:100%;margin:20px auto;}.chart-container.medium{max-width:800px;}.chart-container.small{max-width:500px;}
+.insight-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px;display:flex;gap:20px;align-items:flex-start;}
+.insight-card .num-circle{width:44px;height:44px;border-radius:50%;background:var(--charcoal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:20px;flex-shrink:0;}
+.insight-card h4{font-size:15px;font-weight:600;margin-bottom:4px;}
+.insight-card p{font-size:13px;color:var(--stone);line-height:1.5;}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--stone);border-top:1px solid var(--border);margin-top:40px;line-height:1.8;}
+.footer a{color:var(--blue);text-decoration:none;}
+@media(max-width:1024px){.container{padding:32px 24px;}.header{padding:48px 24px 40px;}.header h1{font-size:36px;}.metric-grid{grid-template-columns:repeat(3,1fr);}.header .hero-stats{gap:24px;flex-wrap:wrap;}}
+@media(max-width:640px){.container{padding:20px 16px;}.header{padding:36px 16px 28px;}.header h1{font-size:26px;}.metric-grid{grid-template-columns:repeat(2,1fr);}.tab-btn{padding:10px 14px;font-size:12px;}.insight-card{flex-direction:column;}}
+@media print{.tab-panel{display:block!important;}.tab-nav{display:none;}.header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head><body>
+<!-- Site Navigation -->
+<style>
+.site-nav{display:flex;align-items:center;gap:20px;padding:10px 40px;background:#0a0a0a;font-family:'DM Sans',system-ui,sans-serif;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;}
+.site-nav-home{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:600;font-size:13px;padding:4px 0;white-space:nowrap;}
+.site-nav-home:hover{color:#fff;}
+.site-nav-sep{width:1px;height:20px;background:rgba(255,255,255,0.15);flex-shrink:0;}
+.site-nav-links{display:flex;gap:2px;flex-wrap:wrap;}
+.site-nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;padding:5px 12px;border-radius:4px;transition:color 0.2s,background 0.2s;white-space:nowrap;}
+.site-nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08);}
+.site-nav-links a.active{color:#fff;background:rgba(255,255,255,0.12);font-weight:600;}
+@media(max-width:640px){.site-nav{padding:8px 16px;gap:10px;}.site-nav-links a{padding:4px 8px;font-size:12px;}.site-nav-sep{display:none;}}
+@media print{.site-nav{display:none;}}
+</style>
+<nav class="site-nav">
+<a href="/" class="site-nav-home">&larr; Home</a>
+<div class="site-nav-sep"></div>
+<div class="site-nav-links">
+<a href="/portfolio">Synthesis</a>
+<a href="/genusplus">GenusPlus</a>
+<a href="/wisetech">WiseTech</a>
+<a href="/kellypartners">Kelly Partners</a>
+<a href="/csl">CSL</a>
+<a href="/seek">SEEK</a>
+<a href="/genusplus-instinct">GNP Instinct</a>
+</div>
+</nav>
+<script>
+(function(){
+  var p=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
+  var links=document.querySelectorAll('.site-nav-links a');
+  var map={
+    '/portfolio':0,'/impact_x_faves_5company_asx_portfolio_synthesis':0,
+    '/genusplus':1,'/genusplus_gnp_ai_job_exposure_dashboard':1,
+    '/wisetech':2,'/wisetech_wtc_ai_job_exposure_dashboard':2,
+    '/kellypartners':3,'/kellypartners_kpg_ai_job_exposure_dashboard':3,
+    '/csl':4,'/csl_csl_ai_job_exposure_dashboard':4,
+    '/seek':5,'/seek_sek_ai_job_exposure_dashboard':5,
+    '/genusplus-instinct':6,'/genusplus_gnp_ai_instinct_assessment':6
+  };
+  var idx=map[p];
+  if(idx!==undefined&&links[idx])links[idx].classList.add('active');
+  var home=document.querySelector('.site-nav-home');
+  if(p===''||p==='/contrast-map'||p==='/asx_ai_exposure_portfolio_contrast_map'){
+    home.innerHTML='\u25CF Home';home.style.fontWeight='700';
+  }
+})();
+</script>
+<!-- End Site Navigation -->
+
+<div class="header">
+  <div class="badge">OUTCOMESNOW — IMPACT x FAVES PORTFOLIO SYNTHESIS</div>
+  <h1>5 ASX Companies. 51 Executives. 599 Tasks.<br><span>One Framework. Five Constraint Types.</span></h1>
+  <p>The first cross-company AI executive exposure analysis built on the IMPACT x FAVES dual-axis framework. What emerges rewrites the Board conversation about AI risk.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">599</div><div class="lbl">Tasks scored</div></div>
+    <div class="hero-stat"><div class="num">51</div><div class="lbl">Executives analysed</div></div>
+    <div class="hero-stat"><div class="num">5</div><div class="lbl">Constraint types</div></div>
+    <div class="hero-stat"><div class="num">~60%</div><div class="lbl">Universal augment zone</div></div>
+  </div>
+</div>
+<div class="container">
+  <nav class="tab-nav" id="mainTabNav">
+    <button class="tab-btn active" data-tab="tab-findings">Key Findings</button>
+    <button class="tab-btn" data-tab="tab-compare">Comparison</button>
+    <button class="tab-btn" data-tab="tab-constraints">Constraints</button>
+    <button class="tab-btn" data-tab="tab-cfo">CFO Signal</button>
+    <button class="tab-btn" data-tab="tab-board">Board Questions</button>
+    <button class="tab-btn" data-tab="tab-method">Method</button>
+  </nav>
+
+  <!-- KEY FINDINGS -->
+  <div id="tab-findings" class="tab-panel active">
+    <h2 class="section-title">What 599 Tasks Reveal</h2>
+    <div class="insight-card"><div class="num-circle">1</div><div><h4>The ~60% Augment Constant</h4><p>Across three radically different single-constraint companies — a power infrastructure builder (60.0%), a logistics SaaS platform (58.5%), and an accounting roll-up (63.5%) — the Augment zone holds at 58-64%. Executive work is judgment work. ~60% sits where AI can prepare, draft, and model, but a human must verify, decide, and sign. When constraints compound (CSL: Atoms + Institutional), the zone expands to 80.6%. Constraint interaction is multiplicative, not additive.</p></div></div>
+    <div class="insight-card"><div class="num-circle">2</div><div><h4>Automate Now % Is Meaningless Without Constraint Type</h4><p>GenusPlus (concrete and cable) and Kelly Partners (tax returns and trusts) both score 4.0-4.1% Automate Now despite completely different sectors. One is protected by physics, the other by law. WiseTech (pure SaaS, cutting 2,000 jobs) only reaches 9.9% at executive level. SEEK breaks the pattern at 16.7% — but only because its platform side is Bits-native. The number tells you nothing; the why tells you everything.</p></div></div>
+    <div class="insight-card"><div class="num-circle">3</div><div><h4>The V-Score Cliff — Regulation Trumps Technology</h4><p>FAVES Volatility (inverse consequence of error) is the single most powerful differentiator. At Kelly Partners, V=1 because the CPA carries personal liability. At CSL, V=1 because the consequence is patient safety. These collapses drag technically-feasible tasks into Augment regardless of AI capability. The Augment zone won't shrink until regulators create frameworks for AI-in-the-loop compliance.</p></div></div>
+    <div class="insight-card"><div class="num-circle">4</div><div><h4>The CFO Is Universally Exposed — Except at SEEK</h4><p>At 4 of 5 companies, the CFO is the most AI-exposed executive. Financial reporting scores F=4-5, A=5, S=5 everywhere. WiseTech's CFO at 0.66x is the most compressed in the portfolio. But at SEEK, the most exposed is the GE for AI (0.68x, 50% Automate Now, 0.5 deskilling) — the person building AI is most vulnerable to it.</p></div></div>
+    <div class="insight-card"><div class="num-circle">5</div><div><h4>CSL's 100% Augment COO</h4><p>Mary Oates achieves perfect 100% Augment — zero tasks automatable, zero ignorable. Every manufacturing task is blocked by physics (fractionation plants) and regulation (GMP/FDA). This is structurally impossible at a software company. When constraint types compound, the other quadrants don't just shrink — they disappear.</p></div></div>
+    <div class="insight-card"><div class="num-circle">6</div><div><h4>Zero Deskilling at the Institutional Pole</h4><p>Kelly Partners shows 0.0 deskilling across every role — the liability wrapper protects complexity, not just routine. CSL shows marginal signals. But WiseTech's CFO (0.4) and SEEK's GE AI (0.5) show active deskilling — AI absorbs their highest-value work. Bits companies hollow from the top; Institutional companies are protected at every level.</p></div></div>
+    <h3 class="sub-title">Quadrant Distribution — All 5 Companies</h3>
+    <div class="chart-container medium"><canvas id="compareBarChart" height="350"></canvas></div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div id="tab-compare" class="tab-panel" style="display:none;">
+    <h2 class="section-title">Portfolio Comparison Matrix</h2>
+    <div class="table-wrapper"><table><thead><tr><th>Company</th><th>ASX</th><th>Constraint</th><th>Roles</th><th>Tasks</th><th style="text-align:center;">AN%</th><th style="text-align:center;">AUG%</th><th style="text-align:center;">CONV%</th><th style="text-align:center;">HF%</th></tr></thead><tbody><tr><td><strong>GenusPlus Group</strong></td><td>GNP</td><td><span class="constraint-badge cb-atoms">Atoms</span></td><td class="num">11</td><td class="num">175</td><td class="num">4.0%</td><td class="num">60.0%</td><td class="num">2.9%</td><td class="num">33.1%</td></tr><tr><td><strong>WiseTech Global</strong></td><td>WTC</td><td><span class="constraint-badge cb-bits">Bits</span></td><td class="num">14</td><td class="num">142</td><td class="num">9.9%</td><td class="num">58.5%</td><td class="num">9.2%</td><td class="num">22.5%</td></tr><tr><td><strong>Kelly Partners Group</strong></td><td>KPG</td><td><span class="constraint-badge cb-inst">Institutional</span></td><td class="num">6</td><td class="num">74</td><td class="num">4.1%</td><td class="num">63.5%</td><td class="num">6.8%</td><td class="num">25.7%</td></tr><tr><td><strong>CSL Limited</strong></td><td>CSL</td><td><span class="constraint-badge cb-dual">Atoms+Institutional</span></td><td class="num">12</td><td class="num">124</td><td class="num">3.2%</td><td class="num">80.6%</td><td class="num">3.2%</td><td class="num">12.9%</td></tr><tr><td><strong>SEEK Limited</strong></td><td>SEK</td><td><span class="constraint-badge cb-cog">Cognitive</span></td><td class="num">8</td><td class="num">84</td><td class="num">16.7%</td><td class="num">63.1%</td><td class="num">8.3%</td><td class="num">11.9%</td></tr></tbody></table></div>
+    <h3 class="sub-title">Most Exposed Executive by Company</h3>
+    <div class="table-wrapper"><table><thead><tr><th>Company</th><th>Most Exposed</th><th>Role</th><th style="text-align:center;">AN%</th><th style="text-align:center;">HC Mult</th><th>Highest Deskill</th><th style="text-align:center;">Index</th></tr></thead><tbody><tr><td>GNP</td><td><strong>Mike Green</strong></td><td>EGM - Corporate Services</td><td class="num">26.7%</td><td class="num">0.87x</td><td>Mike Green</td><td class="num">0.3</td></tr><tr><td>WTC</td><td><strong>Caroline Pham</strong></td><td>Interim Chief Financial Officer</td><td class="num">50.0%</td><td class="num">0.66x</td><td>Caroline Pham</td><td class="num">0.4</td></tr><tr><td>KPG</td><td><strong>Kenneth Ko</strong></td><td>Chief Financial Officer</td><td class="num">20.0%</td><td class="num">0.84x</td><td>Brett Kelly</td><td class="num">0.0</td></tr><tr><td>CSL</td><td><strong>Ken Lim</strong></td><td>Chief Financial Officer</td><td class="num">16.7%</td><td class="num">0.84x</td><td>Andy Schmeltz</td><td class="num">0.1</td></tr><tr><td>SEK</td><td><strong>Grant Wright</strong></td><td>Group Executive, Artificial Intelli</td><td class="num">50.0%</td><td class="num">0.68x</td><td>Grant Wright</td><td class="num">0.5</td></tr></tbody></table></div>
+    <h3 class="sub-title">CFO Comparison — The Universal Frontier</h3>
+    <div class="table-wrapper"><table><thead><tr><th>Company</th><th>Constraint</th><th style="text-align:center;">CFO AN%</th><th style="text-align:center;">CFO HC</th><th>Interpretation</th></tr></thead><tbody><tr><td>GNP</td><td><span class="constraint-badge cb-atoms">Atoms</span></td><td class="num">10.0%</td><td class="num">0.88x</td><td>Moderate — Atoms constraint depresses field-adjacent finance FAVES</td></tr><tr><td>WTC</td><td><span class="constraint-badge cb-bits">Bits</span></td><td class="num">50.0%</td><td class="num">0.66x</td><td>Highest compression — pure Bits finance, high verifiability</td></tr><tr><td>KPG</td><td><span class="constraint-badge cb-inst">Institutional</span></td><td class="num">20.0%</td><td class="num">0.84x</td><td>Moderate — V-score cliff prevents sign-off automation</td></tr><tr><td>CSL</td><td><span class="constraint-badge cb-dual">Atoms+Institutional</span></td><td class="num">16.7%</td><td class="num">0.84x</td><td>Moderate — dual constraint applies equally to finance</td></tr><tr><td>SEK</td><td><span class="constraint-badge cb-cog">Cognitive</span></td><td class="num">33.3%</td><td class="num">0.71x</td><td>High — marketplace analytics are Bits-native</td></tr></tbody></table></div>
+    <h3 class="sub-title">Portfolio Position Map</h3>
+    <div class="chart-container"><canvas id="hcBubbleChart" height="400"></canvas></div>
+  </div>
+
+  <!-- CONSTRAINTS -->
+  <div id="tab-constraints" class="tab-panel" style="display:none;">
+    <h2 class="section-title">The Constraint Ontology</h2>
+    <div class="callout insight"><h4>Four Binding Constraints</h4><p>Every company's AI exposure is shaped by its binding constraint — the structural factor that prevents automation regardless of AI capability. Understanding your constraint type determines strategic allocation between Operator, Fortress, and Escalation.</p></div>
+    <div class="table-wrapper"><table><thead><tr><th>Constraint</th><th>Archetype</th><th>What Blocks Automation</th><th>FAVES Signature</th><th>Strategic Bias</th></tr></thead><tbody>
+      <tr><td><span class="constraint-badge cb-atoms">Atoms</span></td><td>GenusPlus</td><td>Physical delivery — can't AI-pour concrete or pull cable</td><td>Low A (physical context), low V (field errors dangerous)</td><td>50% Fortress / 40% Escalate / 10% Operator</td></tr>
+      <tr><td><span class="constraint-badge cb-bits">Bits</span></td><td>WiseTech</td><td>Integration friction — enterprise systems, not capability</td><td>High F and S, moderate E (system entanglement)</td><td>40% Operator / 20% Fortress / 40% Escalate</td></tr>
+      <tr><td><span class="constraint-badge cb-inst">Institutional</span></td><td>Kelly Partners</td><td>Regulation and liability — CPA signs, carries personal risk</td><td>High F, A, S but collapsed V (statutory consequence)</td><td>50% Fortress / 40% Escalate / 10% Operator</td></tr>
+      <tr><td><span class="constraint-badge cb-dual">Atoms+Inst</span></td><td>CSL</td><td>Physics AND regulation — plasma plants AND TGA/FDA</td><td>Uniformly low — dual constraint compression</td><td>55% Fortress / 40% Escalate / 5% Operator</td></tr>
+      <tr><td><span class="constraint-badge cb-cog">Cognitive</span></td><td>SEEK</td><td>Bimodal — platform is Bits, relationships are judgment</td><td>Wide within-company variance (FAVES 1.0 to 5.0)</td><td>30% Operator / 30% Fortress / 40% Escalate</td></tr>
+    </tbody></table></div>
+    <h3 class="sub-title">Constraint Radar — Quadrant Shape by Type</h3>
+    <div class="chart-container medium"><canvas id="constraintRadarChart" height="400"></canvas></div>
+    <div class="callout warning"><h4>The Compound Constraint Effect</h4><p>Single-constraint companies cluster at ~60% Augment. When constraints compound (CSL), the zone expands to 80.6% — not because more tasks move into Augment, but because the other quadrants collapse. CSL's Human Fortress is only 12.9% because virtually nothing is low-priority when products are life-saving therapies.</p></div>
+  </div>
+
+  <!-- CFO SIGNAL -->
+  <div id="tab-cfo" class="tab-panel" style="display:none;">
+    <h2 class="section-title">The CFO Signal</h2>
+    <div class="metric-grid" style="grid-template-columns:repeat(5,1fr);"><div class="metric-card" style="border-top:3px solid #1d4ed8;"><div class="label">GNP CFO</div><div class="value" style="color:#1d4ed8;">0.88x</div><div class="sub">Atoms</div></div><div class="metric-card" style="border-top:3px solid #8b5cf6;"><div class="label">WTC CFO</div><div class="value" style="color:#8b5cf6;">0.66x</div><div class="sub">Bits</div></div><div class="metric-card" style="border-top:3px solid #dc2626;"><div class="label">KPG CFO</div><div class="value" style="color:#dc2626;">0.84x</div><div class="sub">Institutional</div></div><div class="metric-card" style="border-top:3px solid #0d7377;"><div class="label">CSL CFO</div><div class="value" style="color:#0d7377;">0.84x</div><div class="sub">Atoms+Institutional</div></div><div class="metric-card" style="border-top:3px solid #c2410c;"><div class="label">SEK CFO</div><div class="value" style="color:#c2410c;">0.71x</div><div class="sub">Cognitive</div></div></div>
+    <div class="callout critical"><h4>The Board Question Every Company Must Answer</h4><p>At 4 of 5 companies, the CFO is the most AI-exposed executive. Financial reporting (F=4-5), forecasting (A=5), and compliance checklists (S=5) are universally automatable. WiseTech's CFO at 0.66x means 34% workload compression — today. <strong>"What is our CFO's plan for AI-augmented financial governance?"</strong></p></div>
+    <div class="card card-emphasis"><h3 class="sub-title" style="margin-top:0;">Why the CFO, Not the CTO?</h3><p>Finance work is structured, repetitive, and verifiable (high F, A, S). Technology leadership requires judgment that resists decomposition (lower S) and carries higher consequence for security decisions (lower V). The CTO's tasks are cognitively complex; the CFO's tasks are procedurally complex. AI excels at procedural complexity.</p></div>
+    <h3 class="sub-title">CFO Headcount Compression — Cross-Portfolio</h3>
+    <div class="chart-container medium"><canvas id="cfoBarChart" height="280"></canvas></div>
+  </div>
+
+  <!-- BOARD QUESTIONS -->
+  <div id="tab-board" class="tab-panel" style="display:none;">
+    <h2 class="section-title">Five Questions Every Board Should Ask</h2>
+    <div class="insight-card"><div class="num-circle">1</div><div><h4>"What is our binding constraint — Bits, Atoms, Institutional, or Cognitive?"</h4><p>This determines everything. A Bits company should invest 40% in Operator. An Atoms company should invest 50% in Fortress. Getting this wrong means misallocating strategic resources — automating where you should fortress, or fortressing where you should operationalise.</p></div></div>
+    <div class="insight-card"><div class="num-circle">2</div><div><h4>"What is our CFO's plan for AI-augmented financial governance?"</h4><p>The CFO function is the automation frontier. Which tasks are already AI-augmented? What verification chains maintain sign-off integrity? Is freed capacity going to higher-value judgment or headcount reduction?</p></div></div>
+    <div class="insight-card"><div class="num-circle">3</div><div><h4>"Which regulatory changes would shift our Augment zone into Automate Now?"</h4><p>For Institutional-constraint companies, V-score is set by statute. Track: ATO guidance on AI-in-the-loop compliance, APRA frameworks for AI-assisted reporting, TGA/FDA pathways for AI-validated manufacturing. Regulatory shifts move more tasks than AI capability.</p></div></div>
+    <div class="insight-card"><div class="num-circle">4</div><div><h4>"Are we investing in fortress depth, or automation breadth?"</h4><p>Zero deskilling at the Institutional pole means expertise is fully protected. Fortress companies should double down on human judgment AI cannot replace. The deskilling index tells the Board whether AI is absorbing routine or hollowing expertise.</p></div></div>
+    <div class="insight-card"><div class="num-circle">5</div><div><h4>"Does our company-average hide a bimodal split?"</h4><p>SEEK's average looks moderate. But it hides a 50% AN AI executive and a 0% AN CEO — a 50-point spread. The Board should demand function-level analysis. The average is where strategy goes to die.</p></div></div>
+  </div>
+
+  <!-- METHOD -->
+  <div id="tab-method" class="tab-panel" style="display:none;">
+    <h2 class="section-title">Methodology & Attribution</h2>
+    <div class="card card-emphasis"><h3 class="sub-title" style="margin-top:0;">IMPACT x FAVES Framework</h3><p>Developed by <strong>Walter Adamson</strong> (OutcomesNow). Dual-axis framework separating business case (IMPACT: Investment, Multiplicity, Pain, Accrued value, Cost, Trend) from technical feasibility (FAVES: Fidelity, Autonomy, Volatility, Entanglement, Step decomposability). Inspired by the Trust Insights TRIPS framework (Christopher S. Penn & Katie Robbert), extended with dedicated feasibility factors absent from prior frameworks.</p></div>
+    <div class="card"><h3 class="sub-title" style="margin-top:0;">Portfolio Composition</h3><div class="table-wrapper"><table><thead><tr><th>Company</th><th>ASX</th><th>Revenue</th><th>Employees</th><th>Roles</th><th>Tasks</th><th>Constraint</th></tr></thead><tbody><tr><td>GenusPlus Group</td><td>GNP</td><td>A$751M</td><td>1,178</td><td class="num">11</td><td class="num">175</td><td><span class="constraint-badge cb-atoms">Atoms</span></td></tr><tr><td>WiseTech Global</td><td>WTC</td><td>~A$1.5B</td><td>~7,000</td><td class="num">14</td><td class="num">142</td><td><span class="constraint-badge cb-bits">Bits</span></td></tr><tr><td>Kelly Partners Group</td><td>KPG</td><td>A$135M</td><td>650+</td><td class="num">6</td><td class="num">74</td><td><span class="constraint-badge cb-inst">Institutional</span></td></tr><tr><td>CSL Limited</td><td>CSL</td><td>US$15.6B</td><td>~29,000</td><td class="num">12</td><td class="num">124</td><td><span class="constraint-badge cb-dual">Atoms+Institutional</span></td></tr><tr><td>SEEK Limited</td><td>SEK</td><td>~A$1.1B</td><td>~3,245</td><td class="num">8</td><td class="num">84</td><td><span class="constraint-badge cb-cog">Cognitive</span></td></tr></tbody></table></div><p style="margin-top:12px;font-size:13px;color:var(--stone);">Combined: 51 executives, 599 scored tasks across 5 constraint archetypes. Portfolio designed for maximum contrast across the Bits/Atoms/Institutional/Cognitive constraint surface.</p></div>
+    <div class="card"><h3 class="sub-title" style="margin-top:0;">Calibration</h3><p>O*NET-SOC taxonomy (923 occupations). Anthropic Economic Index (Jan 2026). METR evaluations. Frontier model benchmarks (Mar 2026). Australian adjustments: award wage complexity, professional licensing, geographic adoption lag. All scores 1-5 integer per dimension; composites are dimension means.</p></div>
+    <div class="card"><h3 class="sub-title" style="margin-top:0;">Limitations</h3><p>Executive-level roles only. Employee-level exposure would show higher Automate Now for preparation tasks. Task lists inferred from public information. FAVES scores are point-in-time. Individual company dashboards with full task data, interactive charts, and JSON-LD payloads available separately.</p></div>
+  </div>
+
+  <div class="footer">&copy; 2026 Walter Adamson | BHP 20 years, Head IT Audit &bull; IT Strategy &bull; Corporate Planning &bull; International Bus Development<br>100+ AI workflow solutions delivered | <a href="https://linkedin.com/in/adamson">linkedin.com/in/adamson</a> | <a href="mailto:walter@outcomesnow.com">walter@outcomesnow.com</a></div>
+</div>
+<script>
+var COMPANIES=[{"name": "GenusPlus Group", "ticker": "GNP", "constraint": "Atoms", "accent": "#1d4ed8", "rev": "A$751M", "emp": "1,178", "mcap": "~A$1.2B", "total_tasks": 175, "an_pct": 4.0, "aug_pct": 60.0, "conv_pct": 2.9, "hf_pct": 33.1, "num_roles": 11, "me_name": "Mike Green", "me_title": "EGM - Corporate Services", "me_hc": 0.87, "me_an": 26.7, "hd_name": "Mike Green", "hd_val": 0.3, "cfo_hc": 0.88, "cfo_an": 10.0}, {"name": "WiseTech Global", "ticker": "WTC", "constraint": "Bits", "accent": "#8b5cf6", "rev": "~A$1.5B", "emp": "~7,000", "mcap": "~A$15B", "total_tasks": 142, "an_pct": 9.9, "aug_pct": 58.5, "conv_pct": 9.2, "hf_pct": 22.5, "num_roles": 14, "me_name": "Caroline Pham", "me_title": "Interim Chief Financial Officer", "me_hc": 0.66, "me_an": 50.0, "hd_name": "Caroline Pham", "hd_val": 0.4, "cfo_hc": 0.66, "cfo_an": 50.0}, {"name": "Kelly Partners Group", "ticker": "KPG", "constraint": "Institutional", "accent": "#dc2626", "rev": "A$135M", "emp": "650+", "mcap": "~A$450M", "total_tasks": 74, "an_pct": 4.1, "aug_pct": 63.5, "conv_pct": 6.8, "hf_pct": 25.7, "num_roles": 6, "me_name": "Kenneth Ko", "me_title": "Chief Financial Officer", "me_hc": 0.84, "me_an": 20.0, "hd_name": "Brett Kelly", "hd_val": 0.0, "cfo_hc": 0.84, "cfo_an": 20.0}, {"name": "CSL Limited", "ticker": "CSL", "constraint": "Atoms+Institutional", "accent": "#0d7377", "rev": "US$15.6B", "emp": "~29,000", "mcap": "~A$90B", "total_tasks": 124, "an_pct": 3.2, "aug_pct": 80.6, "conv_pct": 3.2, "hf_pct": 12.9, "num_roles": 12, "me_name": "Ken Lim", "me_title": "Chief Financial Officer", "me_hc": 0.84, "me_an": 16.7, "hd_name": "Andy Schmeltz", "hd_val": 0.1, "cfo_hc": 0.84, "cfo_an": 16.7}, {"name": "SEEK Limited", "ticker": "SEK", "constraint": "Cognitive", "accent": "#c2410c", "rev": "~A$1.1B", "emp": "~3,245", "mcap": "~A$8B", "total_tasks": 84, "an_pct": 16.7, "aug_pct": 63.1, "conv_pct": 8.3, "hf_pct": 11.9, "num_roles": 8, "me_name": "Grant Wright", "me_title": "Group Executive, Artificial Intelli", "me_hc": 0.68, "me_an": 50.0, "hd_name": "Grant Wright", "hd_val": 0.5, "cfo_hc": 0.71, "cfo_an": 33.3}];
+var CC={an:"#16a34a",aug:"#d97706",conv:"#6366f1",hf:"#64748b"};
+(function(){document.getElementById("mainTabNav").addEventListener("click",function(e){var b=e.target.closest(".tab-btn");if(!b)return;var t=b.getAttribute("data-tab");document.querySelectorAll(".tab-panel").forEach(function(p){p.style.display="none";});document.querySelectorAll(".tab-btn").forEach(function(x){x.classList.remove("active");});document.getElementById(t).style.display="block";b.classList.add("active");if(t==="tab-compare"&&!window._hc){drawHCBubble();window._hc=1;};if(t==="tab-constraints"&&!window._cr){drawCR();window._cr=1;};if(t==="tab-cfo"&&!window._cf){drawCFO();window._cf=1;}});})();
+(function(){var ctx=document.getElementById("compareBarChart");if(!ctx)return;new Chart(ctx,{type:"bar",data:{labels:COMPANIES.map(function(c){return c.ticker;}),datasets:[{label:"Automate Now",data:COMPANIES.map(function(c){return c.an_pct;}),backgroundColor:CC.an},{label:"Augment",data:COMPANIES.map(function(c){return c.aug_pct;}),backgroundColor:CC.aug},{label:"Convenience",data:COMPANIES.map(function(c){return c.conv_pct;}),backgroundColor:CC.conv},{label:"Fortress",data:COMPANIES.map(function(c){return c.hf_pct;}),backgroundColor:CC.hf}]},options:{responsive:true,indexAxis:"y",plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},scales:{x:{stacked:true,max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}},y:{stacked:true,grid:{display:false},ticks:{font:{family:"DM Sans",size:13,weight:"600"}}}}}}); })();
+function drawHCBubble(){var ctx=document.getElementById("hcBubbleChart");if(!ctx)return;var ds=COMPANIES.map(function(c,i){return{label:c.ticker,data:[{x:c.an_pct,y:c.aug_pct,r:Math.max(10,(100-c.me_hc*100)*3)}],backgroundColor:c.accent+"88",borderColor:c.accent,borderWidth:2};});new Chart(ctx,{type:"bubble",data:{datasets:ds},options:{responsive:true,scales:{x:{title:{display:true,text:"Automate Now % \u2192",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"}},y:{title:{display:true,text:"Augment % \u2192",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"}}},plugins:{tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+" (AN:"+ctx.raw.x+"%, AUG:"+ctx.raw.y+"%)";}}},legend:{position:"top",labels:{font:{family:"DM Sans",size:11}}}}}}); }
+function drawCR(){var ctx=document.getElementById("constraintRadarChart");if(!ctx)return;var ds=COMPANIES.map(function(c){return{label:c.ticker+" ("+c.constraint+")",data:[c.an_pct,c.aug_pct,c.conv_pct,c.hf_pct],backgroundColor:c.accent+"22",borderColor:c.accent,borderWidth:2,pointBackgroundColor:c.accent,pointRadius:4};});new Chart(ctx,{type:"radar",data:{labels:["Automate Now %","Augment %","Convenience %","Human Fortress %"],datasets:ds},options:{responsive:true,scales:{r:{min:0,max:85,ticks:{stepSize:20},pointLabels:{font:{family:"DM Sans",size:12,weight:"500"}}}},plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:11}}}}}}); }
+function drawCFO(){var ctx=document.getElementById("cfoBarChart");if(!ctx)return;new Chart(ctx,{type:"bar",data:{labels:COMPANIES.map(function(c){return c.ticker;}),datasets:[{label:"CFO HC Multiplier",data:COMPANIES.map(function(c){return c.cfo_hc;}),backgroundColor:COMPANIES.map(function(c){return c.accent;}),borderColor:COMPANIES.map(function(c){return c.accent;}),borderWidth:2}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{min:0.5,max:1.0,ticks:{callback:function(v){return v+"x";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}},x:{grid:{display:false},ticks:{font:{family:"DM Sans",size:13,weight:"600"}}}}}}); }
+</script></body></html>
