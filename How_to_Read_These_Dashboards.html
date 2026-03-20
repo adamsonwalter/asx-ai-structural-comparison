@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Read These Dashboards — IMPACT × FAVES AI Job Exposure Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#f5f4f0;--white:#fff;--charcoal:#1a1a1a;--noir:#0a0a0a;--stone:#8a8680;--border:#d8d4cc;--green:#16a34a;--orange:#d97706;--purple:#6366f1;--slate:#64748b;--blue:#1d4ed8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--ivory);color:var(--charcoal);font-size:15px;line-height:1.7;}
+
+/* Header */
+.header{background:var(--charcoal);padding:48px 48px 44px;color:#fff;}
+.header .eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.4);margin-bottom:16px;}
+.header h1{font-family:'Instrument Serif',serif;font-size:42px;font-weight:400;line-height:1.15;margin-bottom:10px;}
+.header p{font-size:16px;color:rgba(255,255,255,0.6);max-width:600px;}
+
+.container{max-width:820px;margin:0 auto;padding:48px 32px 80px;}
+
+/* Section headers */
+.section-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--stone);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+h2{font-family:'Instrument Serif',serif;font-size:30px;font-weight:400;margin-bottom:8px;}
+h2 + p.lead{font-size:15px;color:var(--stone);margin-bottom:28px;max-width:600px;}
+.divider{height:1px;background:var(--border);margin:48px 0;}
+
+/* The core explainer card */
+.explainer{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:24px;}
+.explainer-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.explainer-header .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.explainer-header h3{font-size:15px;font-weight:600;}
+.explainer-header .tag{font-size:11px;color:var(--stone);margin-left:auto;font-weight:500;}
+.explainer-body{padding:20px 24px 24px;}
+.explainer-body p{font-size:14px;line-height:1.65;color:#444;}
+.explainer-body .one-line{font-size:15px;font-weight:500;color:var(--charcoal);margin-bottom:8px;}
+.explainer-body .example{font-size:13px;color:var(--stone);font-style:italic;margin-top:8px;padding-left:14px;border-left:2px solid var(--border);}
+
+/* The 2x2 matrix visual */
+.matrix-visual{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:20px 0;border-radius:8px;overflow:hidden;}
+.matrix-cell{padding:18px 20px;font-size:13px;line-height:1.5;}
+.matrix-cell h4{font-size:14px;font-weight:600;margin-bottom:4px;}
+.matrix-cell p{font-size:12px;opacity:0.8;}
+.mc-an{background:rgba(22,163,74,0.08);color:#15803d;}
+.mc-aug{background:rgba(217,119,6,0.08);color:#92400e;}
+.mc-conv{background:rgba(99,102,241,0.08);color:#4338ca;}
+.mc-hf{background:rgba(100,116,139,0.08);color:#334155;}
+
+/* IMPACT/FAVES letter breakdowns */
+.letter-grid{display:grid;grid-template-columns:48px 1fr;gap:0;margin:16px 0;}
+.letter-grid .letter{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;padding:10px 0;text-align:center;border-bottom:1px solid var(--border);}
+.letter-grid .meaning{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--border);color:#555;}
+.letter-grid .meaning strong{color:var(--charcoal);font-weight:600;}
+
+/* Metric explainer cards */
+.metric-explain{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.me-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;}
+.me-card .me-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--stone);margin-bottom:4px;}
+.me-card .me-what{font-size:14px;font-weight:500;margin-bottom:6px;}
+.me-card .me-why{font-size:12px;color:var(--stone);line-height:1.5;}
+
+/* Constraint cards */
+.constraint-strip{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;}
+.cs-pill{padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;}
+.cs-atoms{background:rgba(29,78,216,0.08);color:#1d4ed8;}
+.cs-bits{background:rgba(139,92,246,0.08);color:#8b5cf6;}
+.cs-inst{background:rgba(220,38,38,0.08);color:#dc2626;}
+.cs-dual{background:rgba(13,115,119,0.08);color:#0d7377;}
+.cs-cog{background:rgba(194,65,12,0.08);color:#c2410c;}
+.cs-pill .cs-sub{font-weight:400;font-size:11px;opacity:0.7;}
+
+/* Reading guide callout */
+.reading-guide{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0;display:flex;gap:16px;align-items:flex-start;}
+.reading-guide .rg-icon{width:40px;height:40px;background:var(--charcoal);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex-shrink:0;}
+.reading-guide .rg-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+.reading-guide .rg-body{font-size:13px;color:var(--stone);line-height:1.55;}
+
+/* Score scale */
+.score-scale{display:flex;gap:0;margin:12px 0;border-radius:6px;overflow:hidden;}
+.score-scale .ss-seg{flex:1;padding:10px 8px;text-align:center;font-size:11px;font-weight:600;}
+.ss-1{background:#fef2f2;color:#991b1b;}
+.ss-2{background:#fff7ed;color:#9a3412;}
+.ss-3{background:#fefce8;color:#854d0e;}
+.ss-4{background:#f0fdf4;color:#166534;}
+.ss-5{background:#ecfdf5;color:#065f46;}
+
+.footer{text-align:center;padding:40px 32px;font-size:12px;color:var(--stone);border-top:1px solid var(--border);margin-top:48px;line-height:1.8;}
+.footer a{color:var(--blue);text-decoration:none;}
+
+@media(max-width:640px){
+  .container{padding:32px 16px 60px;}
+  .header{padding:32px 16px;}
+  .header h1{font-size:30px;}
+  .matrix-visual{grid-template-columns:1fr;}
+  .metric-explain{grid-template-columns:1fr;}
+  .letter-grid{grid-template-columns:40px 1fr;}
+  .constraint-strip{flex-direction:column;}
+}
+</style></head><body>
+
+<div class="header">
+  <div class="eyebrow">Reading Guide</div>
+  <h1>How to read these dashboards</h1>
+  <p>Everything you need to understand the analysis — in three minutes.</p>
+</div>
+
+<div class="container">
+
+  <!-- ===== SECTION 1: THE FOUR QUADRANTS ===== -->
+  <div class="section-num">01 — The four quadrants</div>
+  <h2>What are we looking at?</h2>
+  <p class="lead">Every executive task is scored on two axes — business case and technical feasibility — and placed in one of four quadrants.</p>
+
+  <div class="matrix-visual">
+    <div class="matrix-cell mc-an">
+      <h4>Automate now</h4>
+      <p>Strong business case AND AI can do it reliably. Deploy AI, human monitors.</p>
+    </div>
+    <div class="matrix-cell mc-aug">
+      <h4>Augment</h4>
+      <p>Strong business case BUT AI can't do it alone yet. AI assists, human decides.</p>
+    </div>
+    <div class="matrix-cell mc-conv">
+      <h4>Convenience</h4>
+      <p>Weak business case but AI could do it. Automate when convenient — low priority.</p>
+    </div>
+    <div class="matrix-cell mc-hf">
+      <h4>Human fortress</h4>
+      <p>Weak business case AND AI can't do it. Leave alone. Revisit annually.</p>
+    </div>
+  </div>
+
+  <div class="reading-guide">
+    <div class="rg-icon">?</div>
+    <div><div class="rg-title">What should I look at first?</div>
+    <div class="rg-body">The percentage bars on each company card. If the orange (Augment) dominates — as it does for most executives — it means AI can help but can't replace. If green (Automate Now) is significant, that role is on the automation frontier. Most executive roles are 60%+ orange. That's the finding.</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 2: THE TWO AXES ===== -->
+  <div class="section-num">02 — The two axes</div>
+  <h2>IMPACT × FAVES</h2>
+  <p class="lead">Most AI assessments produce one score per task. This framework produces two — because "should we automate this?" and "can AI actually do this?" are different questions.</p>
+
+  <div class="explainer">
+    <div class="explainer-header">
+      <div class="dot" style="background:var(--charcoal);"></div>
+      <h3>IMPACT — "Is it worth automating?"</h3>
+      <span class="tag">Business case axis</span>
+    </div>
+    <div class="explainer-body">
+      <p class="one-line">Scores how much value you'd unlock by automating this task.</p>
+      <div class="letter-grid">
+        <div class="letter" style="color:var(--charcoal);">I</div><div class="meaning"><strong>Investment of time</strong> — how many hours does this task consume?</div>
+        <div class="letter" style="color:var(--charcoal);">M</div><div class="meaning"><strong>Multiplicity</strong> — how many people do this, how often?</div>
+        <div class="letter" style="color:var(--charcoal);">P</div><div class="meaning"><strong>Pain</strong> — how tedious or error-prone is it?</div>
+        <div class="letter" style="color:var(--charcoal);">A</div><div class="meaning"><strong>Accrued economic value</strong> — what's the revenue or cost impact?</div>
+        <div class="letter" style="color:var(--charcoal);">C</div><div class="meaning"><strong>Cost of current execution</strong> — how expensive is it to do manually?</div>
+        <div class="letter" style="color:var(--charcoal);">T</div><div class="meaning"><strong>Trend</strong> — is the volume growing, stable, or shrinking?</div>
+      </div>
+      <div class="example">High IMPACT = "Yes, it's worth automating this — if AI can actually do it." IMPACT says nothing about whether AI can.</div>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <div class="explainer-header">
+      <div class="dot" style="background:var(--blue);"></div>
+      <h3>FAVES — "Can AI actually do it?"</h3>
+      <span class="tag">Feasibility axis</span>
+    </div>
+    <div class="explainer-body">
+      <p class="one-line">Scores whether generative AI can perform this task reliably today.</p>
+      <div class="letter-grid">
+        <div class="letter" style="color:var(--blue);">F</div><div class="meaning"><strong>Fidelity of verification</strong> — can a non-expert check if the output is correct? <em>The hallucination firewall.</em></div>
+        <div class="letter" style="color:var(--blue);">A</div><div class="meaning"><strong>Autonomy of context</strong> — does AI have access to everything it needs, or is critical knowledge in someone's head?</div>
+        <div class="letter" style="color:var(--blue);">V</div><div class="meaning"><strong>Volatility of consequence</strong> — how bad is a wrong answer? <em>(Inverse: high score = low consequence.)</em></div>
+        <div class="letter" style="color:var(--blue);">E</div><div class="meaning"><strong>Entanglement with systems</strong> — how many enterprise systems must be connected? <em>(Inverse: high = standalone.)</em></div>
+        <div class="letter" style="color:var(--blue);">S</div><div class="meaning"><strong>Step decomposability</strong> — can the task be broken into checkpoints where humans verify along the way?</div>
+      </div>
+      <div class="example">High FAVES = "Yes, AI can do this reliably." Low FAVES means it can't — yet — regardless of how strong the business case is.</div>
+    </div>
+  </div>
+
+  <div class="reading-guide">
+    <div class="rg-icon">!</div>
+    <div><div class="rg-title">Why two scores instead of one?</div>
+    <div class="rg-body">A task can score high on IMPACT and low on FAVES — worth automating but AI can't do it yet. That's the Augment quadrant, where ~60% of all executive tasks land. A single composite score hides this distinction. It's the difference between "AI exposure: 65%" (meaningless) and "65% of your tasks are worth automating but AI needs human oversight" (actionable).</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 3: THE SCORES ===== -->
+  <div class="section-num">03 — Reading the scores</div>
+  <h2>What the numbers mean</h2>
+  <p class="lead">Every dimension is scored 1-5. The composite is the average across all dimensions on that axis.</p>
+
+  <div class="score-scale">
+    <div class="ss-seg ss-1">1 — Minimal</div>
+    <div class="ss-seg ss-2">2 — Low</div>
+    <div class="ss-seg ss-3">3 — Moderate</div>
+    <div class="ss-seg ss-4">4 — High</div>
+    <div class="ss-seg ss-5">5 — Maximum</div>
+  </div>
+
+  <div class="metric-explain">
+    <div class="me-card">
+      <div class="me-label">IMPACT composite ≥ 3.5</div>
+      <div class="me-what">Strong business case</div>
+      <div class="me-why">This task is expensive, time-consuming, or high-value enough that automating it would produce meaningful ROI.</div>
+    </div>
+    <div class="me-card">
+      <div class="me-label">FAVES composite ≥ 3.5</div>
+      <div class="me-what">AI can do it reliably</div>
+      <div class="me-why">The output is verifiable, context is digital, consequences are manageable, and the task breaks into checkable steps.</div>
+    </div>
+    <div class="me-card">
+      <div class="me-label">Headcount multiplier</div>
+      <div class="me-what">e.g. "0.80x"</div>
+      <div class="me-why">Means AI could theoretically compress 20% of this role's workload. Lower = more exposed. Most executives are 0.84–0.93x. The CFO is often the outlier.</div>
+    </div>
+    <div class="me-card">
+      <div class="me-label">Deskilling index</div>
+      <div class="me-what">e.g. "0.3"</div>
+      <div class="me-why">What fraction of the role's highest-value expert tasks are being absorbed by AI. 0.0 = expertise is protected. 0.5 = AI is hollowing the complex work, leaving routine residue.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 4: THE MATRIX SCATTER ===== -->
+  <div class="section-num">04 — The scatter plot</div>
+  <h2>Reading the IMPACT × FAVES matrix</h2>
+  <p class="lead">Each dot is a task. Its position tells you what to do with it.</p>
+
+  <div class="reading-guide">
+    <div class="rg-icon" style="background:var(--green);font-size:14px;">↗</div>
+    <div><div class="rg-title">Top-right = Automate Now</div>
+    <div class="rg-body">High business case + high feasibility. Deploy AI, human monitors output. The green zone.</div></div>
+  </div>
+  <div class="reading-guide">
+    <div class="rg-icon" style="background:var(--orange);font-size:14px;">↖</div>
+    <div><div class="rg-title">Top-left = Augment</div>
+    <div class="rg-body">High business case + low feasibility. AI assists, human verifies and decides. The orange zone — where most executive tasks live.</div></div>
+  </div>
+  <div class="reading-guide">
+    <div class="rg-icon" style="background:var(--purple);font-size:14px;">↘</div>
+    <div><div class="rg-title">Bottom-right = Convenience</div>
+    <div class="rg-body">Low business case + high feasibility. AI can do it, but it's low priority. Automate when convenient.</div></div>
+  </div>
+  <div class="reading-guide">
+    <div class="rg-icon" style="background:var(--slate);font-size:14px;">↙</div>
+    <div><div class="rg-title">Bottom-left = Human Fortress</div>
+    <div class="rg-body">Low business case + low feasibility. Not worth the effort or the risk. Leave alone. Revisit next year.</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 5: THE RADAR ===== -->
+  <div class="section-num">05 — The radar chart</div>
+  <h2>Reading the FAVES radar</h2>
+  <p class="lead">Five spokes, one per FAVES dimension. A full, balanced pentagon means the role is highly automatable. A collapsed or lopsided shape tells you why it isn't.</p>
+
+  <div class="reading-guide">
+    <div class="rg-icon" style="font-size:14px;">⬠</div>
+    <div><div class="rg-title">What to look for</div>
+    <div class="rg-body">The shape matters more than the size. A pentagon that collapses on one spoke — say, V (consequence) — tells you that one dimension is blocking automation even when the other four are strong. Kelly Partners' accountants show exactly this: strong F, A, S but V=1 because the CPA carries personal liability. The radar makes the bottleneck visible.</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 6: CONSTRAINT TYPES ===== -->
+  <div class="section-num">06 — The five constraint types</div>
+  <h2>Why does exposure differ?</h2>
+  <p class="lead">Every company's AI exposure is shaped by its binding constraint — the structural factor that prevents automation regardless of how good AI gets.</p>
+
+  <div class="constraint-strip">
+    <div class="cs-pill cs-atoms">Atoms <span class="cs-sub">— physical delivery (GenusPlus)</span></div>
+    <div class="cs-pill cs-bits">Bits <span class="cs-sub">— digital/software (WiseTech)</span></div>
+    <div class="cs-pill cs-inst">Institutional <span class="cs-sub">— regulation & liability (Kelly Partners)</span></div>
+    <div class="cs-pill cs-dual">Atoms + Institutional <span class="cs-sub">— both (CSL)</span></div>
+    <div class="cs-pill cs-cog">Cognitive <span class="cs-sub">— judgment & relationships (SEEK)</span></div>
+  </div>
+
+  <div class="explainer">
+    <div class="explainer-body">
+      <p>The constraint type determines which FAVES dimensions score low — and therefore which quadrant dominates. Atoms companies have low A (context is physical) and low V (field errors are dangerous). Institutional companies have low V (statutory consequences) despite high everything else. Cognitive companies show bimodal splits — the platform side looks like Bits, the relationship side looks like Atoms.</p>
+      <div class="example">When you compare two companies with similar Augment percentages but different constraint types, the strategic response is completely different. An Atoms company should fortress. A Bits company should operationalise. The constraint type — not the exposure score — determines what to do.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 7: THE THREE STRATEGIES ===== -->
+  <div class="section-num">07 — The three strategic paths</div>
+  <h2>What to do about it</h2>
+  <p class="lead">Every company gets a recommended allocation across three paths. The mix depends on constraint type.</p>
+
+  <div class="metric-explain">
+    <div class="me-card" style="border-left:3px solid var(--green);">
+      <div class="me-label" style="color:var(--green);">Operator</div>
+      <div class="me-what">Master AI tools for your Automate Now tasks</div>
+      <div class="me-why">Become irreplaceable because you run the machines. Best when your industry hasn't adopted yet. Risk: AI capability accelerates faster than your operator moat.</div>
+    </div>
+    <div class="me-card" style="border-left:3px solid var(--slate);">
+      <div class="me-label" style="color:var(--slate);">Fortress</div>
+      <div class="me-what">Double down on what AI can't replace</div>
+      <div class="me-why">Redirect energy toward tasks where human judgment is structurally irreplaceable — relationships, physical delivery, regulatory navigation. Risk: FAVES scores rise over time.</div>
+    </div>
+  </div>
+  <div class="me-card" style="border-left:3px solid var(--purple);background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:20px;">
+    <div class="me-label" style="color:var(--purple);">Escalate</div>
+    <div class="me-what">Wrap AI commodity outputs in higher-value human services</div>
+    <div class="me-why">AI produces the draft, the forecast, the analysis. You add the judgment, the relationship, the trust. Clients pay for the judgment. The pattern: AI does the $3,000 task, you redirect 6 hours to the $15,000 engagement. Universally recommended at ~40% regardless of constraint type.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== SECTION 8: QUICK REFERENCE ===== -->
+  <div class="section-num">08 — Quick reference</div>
+  <h2>Glossary</h2>
+  <p class="lead">For when you see a term on a dashboard and need a one-line answer.</p>
+
+  <div class="explainer">
+    <div class="explainer-body" style="font-size:13px;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;width:180px;">Automate Now %</td><td style="padding:8px 0;color:#555;">Tasks where both business case and AI feasibility are strong. Deploy AI now.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">Augment %</td><td style="padding:8px 0;color:#555;">Tasks worth automating but AI can't yet do reliably. Human-in-the-loop.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">Convenience %</td><td style="padding:8px 0;color:#555;">AI could do it, but low priority. Automate when you get around to it.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">Human Fortress %</td><td style="padding:8px 0;color:#555;">Not worth automating AND AI can't do it. Leave alone.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">HC Multiplier</td><td style="padding:8px 0;color:#555;">How much AI could compress the role's workload. 0.80x = 20% compression.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">Deskilling Index</td><td style="padding:8px 0;color:#555;">Fraction of high-value expert tasks in Automate Now. 0 = protected. 0.5 = hollowing.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">Adoption Gap</td><td style="padding:8px 0;color:#555;">Gap between what AI could theoretically do vs what's automatable today. Measured in percentage points.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">V-Score Cliff</td><td style="padding:8px 0;color:#555;">When consequence-of-error (V) collapses to 1, blocking automation despite high scores elsewhere.</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;font-weight:600;">IMPACT composite</td><td style="padding:8px 0;color:#555;">Average of I, M, P, A, C, T scores (1-5). The business case for automation.</td></tr>
+        <tr><td style="padding:8px 0;font-weight:600;">FAVES composite</td><td style="padding:8px 0;color:#555;">Average of F, A, V, E, S scores (1-5). Whether AI can technically do it.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 Walter Adamson | BHP 20 years, Head IT Audit &bull; IT Strategy &bull; Corporate Planning &bull; International Bus Development<br>
+    100+ AI workflow solutions delivered | <a href="https://linkedin.com/in/adamson">linkedin.com/in/adamson</a> | <a href="mailto:walter@outcomesnow.com">walter@outcomesnow.com</a>
+  </div>
+</div>
+</body></html>

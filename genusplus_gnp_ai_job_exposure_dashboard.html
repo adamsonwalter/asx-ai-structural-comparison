@@ -1210,7 +1210,7 @@ var chartColors = {an:"#16a34a",aug:"#d97706",conv:"#6366f1",hf:"#64748b"};
       ]
     },
     options:{
-      responsive:true,
+      responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},
       scales:{x:{stacked:true,grid:{display:false},ticks:{font:{family:"DM Sans",size:11}}},y:{stacked:true,max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}}}
     }
@@ -1228,7 +1228,7 @@ var chartColors = {an:"#16a34a",aug:"#d97706",conv:"#6366f1",hf:"#64748b"};
       datasets:[{data:[4.0,60.0,2.9,33.1],backgroundColor:[chartColors.an,chartColors.aug,chartColors.conv,chartColors.hf],borderWidth:2,borderColor:"#f5f4f0"}]
     },
     options:{
-      responsive:true,
+      responsive:true,maintainAspectRatio:false,
       cutout:"55%",
       plugins:{legend:{position:"bottom",labels:{font:{family:"DM Sans",size:12},padding:16}}}
     }
@@ -1251,7 +1251,7 @@ function drawMatrix(filter){
     type:"scatter",
     data:{datasets:datasets},
     options:{
-      responsive:true,
+      responsive:true,maintainAspectRatio:false,
       scales:{
         x:{min:0,max:5.5,title:{display:true,text:"FAVES (Feasibility) →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}},
         y:{min:0,max:5.5,title:{display:true,text:"IMPACT (Business Case) →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}}
@@ -1300,7 +1300,7 @@ function drawRadar(roleName){
       }]
     },
     options:{
-      responsive:true,
+      responsive:true,maintainAspectRatio:false,
       scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{family:"DM Sans",size:10}},pointLabels:{font:{family:"DM Sans",size:12,weight:"500"}},grid:{color:"#e5e5e5"}}},
       plugins:{legend:{display:true,labels:{font:{family:"DM Sans",size:12}}}}
     }
@@ -1323,7 +1323,7 @@ function drawAdoptionGap(){
       ]
     },
     options:{
-      responsive:true,
+      responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:"top",labels:{font:{family:"DM Sans",size:12}}}},
       scales:{y:{max:100,ticks:{callback:function(v){return v+"%";},font:{family:"DM Sans",size:11}},grid:{color:"#e5e5e5"}},x:{grid:{display:false},ticks:{font:{family:"DM Sans",size:11}}}}
     }
@@ -1348,7 +1348,7 @@ function drawPortfolioBubble(){
     type:"bubble",
     data:{datasets:datasets},
     options:{
-      responsive:true,
+      responsive:true,maintainAspectRatio:false,
       scales:{
         x:{min:1,max:4,title:{display:true,text:"Weighted FAVES →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}},
         y:{min:3,max:4.5,title:{display:true,text:"Weighted IMPACT →",font:{family:"DM Sans",size:13,weight:"600"}},grid:{color:"#e5e5e5"},ticks:{font:{family:"DM Sans",size:11}}}
