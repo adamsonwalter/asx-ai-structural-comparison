@@ -1,0 +1,24 @@
+# ASX AI Structural Comparison
+A cross-company AI executive exposure analysis built on the IMPACT × FAVES dual-axis framework.
+
+## Project Summary
+ASX-listed companies analyzed across 599 tasks, 51 executives, and 5 constraint archetypes. The analysis explores how AI exposure is shaped by binding constraints: Bits, Atoms, Institutional, and Cognitive.
+
+## Core Framework
+- **IMPACT** (Business Case): Investment, Multiplicity, Pain, Accrued value, Cost, Trend.
+- **FAVES** (Technical Feasibility): Fidelity, Autonomy, Volatility, Entanglement, Step decomposability.
+
+## Key Pages
+- **[Contrast Map](/)**: Site home — portfolio contrast set and design rationale.
+- **[Synthesis](/portfolio)**: Portfolio-wide findings, CFO signals, and board questions.
+- **[Guide](/guide)**: How to read the dashboards and quadrant definitions.
+- **[GenusPlus (GNP)](/genusplus)**: Atoms constraint (Physical infrastructure).
+- **[WiseTech (WTC)](/wisetech)**: Bits constraint (Logistics SaaS).
+- **[Kelly Partners (KPG)](/kellypartners)**: Institutional constraint (Accounting compliance).
+- **[CSL Limited (CSL)](/csl)**: Dual Atoms/Institutional constraint (Biotech/Plasma).
+- **[SEEK Limited (SEK)](/seek)**: Cognitive constraint (Employment marketplace).
+
+## Key Metadata
+- Generated: March 2026.
+- Calibration: O*NET-SOC, Anthropic Economic Index, METR evaluations, frontier model benchmarks.
+- Author: Walter Adamson — OutcomesNow.
