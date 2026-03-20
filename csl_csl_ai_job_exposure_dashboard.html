@@ -130,6 +130,7 @@ tr:hover td{background:rgba(13,115,119,0.03);}
 <a href="/" class="site-nav-home">&larr; Home</a>
 <div class="site-nav-sep"></div>
 <div class="site-nav-links">
+<a href="/guide">Guide</a>
 <a href="/portfolio">Synthesis</a>
 <a href="/genusplus">GenusPlus</a>
 <a href="/wisetech">WiseTech</a>
@@ -144,13 +145,14 @@ tr:hover td{background:rgba(13,115,119,0.03);}
   var p=location.pathname.replace(/\/$/,'').replace(/\.html$/,'');
   var links=document.querySelectorAll('.site-nav-links a');
   var map={
-    '/portfolio':0,'/impact_x_faves_5company_asx_portfolio_synthesis':0,
-    '/genusplus':1,'/genusplus_gnp_ai_job_exposure_dashboard':1,
-    '/wisetech':2,'/wisetech_wtc_ai_job_exposure_dashboard':2,
-    '/kellypartners':3,'/kellypartners_kpg_ai_job_exposure_dashboard':3,
-    '/csl':4,'/csl_csl_ai_job_exposure_dashboard':4,
-    '/seek':5,'/seek_sek_ai_job_exposure_dashboard':5,
-    '/genusplus-instinct':6,'/genusplus_gnp_ai_instinct_assessment':6
+    '/guide':0,'/how_to_read_these_dashboards':0,
+    '/portfolio':1,'/impact_x_faves_5company_asx_portfolio_synthesis':1,
+    '/genusplus':2,'/genusplus_gnp_ai_job_exposure_dashboard':2,
+    '/wisetech':3,'/wisetech_wtc_ai_job_exposure_dashboard':3,
+    '/kellypartners':4,'/kellypartners_kpg_ai_job_exposure_dashboard':4,
+    '/csl':5,'/csl_csl_ai_job_exposure_dashboard':5,
+    '/seek':6,'/seek_sek_ai_job_exposure_dashboard':6,
+    '/genusplus-instinct':7,'/genusplus_gnp_ai_instinct_assessment':7
   };
   var idx=map[p];
   if(idx!==undefined&&links[idx])links[idx].classList.add('active');
@@ -161,6 +163,7 @@ tr:hover td{background:rgba(13,115,119,0.03);}
 })();
 </script>
 <!-- End Site Navigation -->
+
 
 <div class="header">
   <div class="badge">AI JOB EXPOSURE — IMPACT × FAVES — DUAL ATOMS + INSTITUTIONAL CONSTRAINT</div>

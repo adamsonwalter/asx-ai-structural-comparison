@@ -7,6 +7,12 @@
   to = "/asx_ai_exposure_portfolio_contrast_map.html"
   status = 200
 
+# Guide page
+[[redirects]]
+  from = "/guide"
+  to = "/how_to_read_these_dashboards.html"
+  status = 200
+
 # Clean URL rewrites (200 = content served at short path, URL stays clean)
 [[redirects]]
   from = "/portfolio"
