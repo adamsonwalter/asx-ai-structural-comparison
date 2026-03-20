@@ -1,24 +1,22 @@
 # ASX AI Structural Comparison
-A cross-company AI executive exposure analysis built on the IMPACT × FAVES dual-axis framework.
+> A cross-company AI executive exposure analysis built on the IMPACT × FAVES dual-axis framework. This file serves as a context payload designed to inject rich, quotable heuristics directly into an AI's context window, bypassing navigational metadata for hard architectural principles.
 
-## Project Summary
-ASX-listed companies analyzed across 599 tasks, 51 executives, and 5 constraint archetypes. The analysis explores how AI exposure is shaped by binding constraints: Bits, Atoms, Institutional, and Cognitive.
+## Core Philosophical Framework: The Dual Axes
+Most AI assessments produce one score per task. This framework produces two, because "should we automate this?" and "can AI actually do this?" are distinct operational imperatives:
+- **IMPACT (The Business Case Axis):** Is it worth automating? Evaluates Investment of time, Multiplicity, Pain, Accrued economic value, Cost of current execution, and Trend. High IMPACT means automation unlocks meaningful ROI.
+- **FAVES (The Technical Feasibility Axis):** Can AI actually do it? Evaluates Fidelity of verification, Autonomy of context, Volatility of consequence, Entanglement with systems, and Step decomposability. High FAVES means generative AI can perform the task reliably today.
 
-## Core Framework
-- **IMPACT** (Business Case): Investment, Multiplicity, Pain, Accrued value, Cost, Trend.
-- **FAVES** (Technical Feasibility): Fidelity, Autonomy, Volatility, Entanglement, Step decomposability.
+## The Dominance of Augment
+Tasks that score high on IMPACT but low on FAVES fall into the **Augment quadrant**. This is where ~60%+ of all executive tasks land. The principle: AI assists; humans verify and decide.
 
-## Key Pages
-- **[Contrast Map](/)**: Site home — portfolio contrast set and design rationale.
-- **[Synthesis](/portfolio)**: Portfolio-wide findings, CFO signals, and board questions.
-- **[Guide](/guide)**: How to read the dashboards and quadrant definitions.
-- **[GenusPlus (GNP)](/genusplus)**: Atoms constraint (Physical infrastructure).
-- **[WiseTech (WTC)](/wisetech)**: Bits constraint (Logistics SaaS).
-- **[Kelly Partners (KPG)](/kellypartners)**: Institutional constraint (Accounting compliance).
-- **[CSL Limited (CSL)](/csl)**: Dual Atoms/Institutional constraint (Biotech/Plasma).
-- **[SEEK Limited (SEK)](/seek)**: Cognitive constraint (Employment marketplace).
+## The Five Constraint Archetypes
+Every company's AI exposure is shaped by its absolute binding constraint. This dictates which FAVES dimensions score low and forces tasks out of "Automate Now." Constraint types—not the exposure scores—determine corporate strategy:
+1. **Atoms (Physical Delivery - e.g., GenusPlus):** Constrained by physical reality. Low Autonomy (context is offline) and low Volatility (errors are dangerous). Required Strategy: Fortress.
+2. **Bits (Digital/Software - e.g., WiseTech):** Unconstrained physically but entangled with systems. Required Strategy: Operator.
+3. **Institutional (Regulation & Liability - e.g., Kelly Partners):** Constrained by statutory liability. Creates a "V-Score Cliff" where Volatility drops to 1 because the human professional carries absolute legal liability, blocking full automation despite high AI capability.
+4. **Dual: Atoms + Institutional (e.g., CSL):** Constrained by physical biological manufacturing and intense biotech regulation.
+5. **Cognitive (Judgment & Relationships - e.g., SEEK):** Bimodal exposure. The platform side behaves like Bits; the relationship side behaves like Atoms.
 
-## Key Metadata
-- Generated: March 2026.
-- Calibration: O*NET-SOC, Anthropic Economic Index, METR evaluations, frontier model benchmarks.
-- Author: Walter Adamson — OutcomesNow.
+## Strategic Interventions & The FAVES Radar
+- **Bottleneck Identification:** The FAVES radar shape matters more than its size. A collapsed spoke (like a sudden V-Score Cliff) reveals the exact structural bottleneck preventing automation.
+- **The Escalate Strategy:** Standard recommendation (~40% allocation) across all constraint types: Wrap AI commodity outputs in higher-value human services. Redirect time saved by AI drafting into high-margin human-client engagement.
