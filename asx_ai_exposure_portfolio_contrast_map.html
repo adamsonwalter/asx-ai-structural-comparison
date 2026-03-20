@@ -87,6 +87,10 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
 .site-nav-links a.active{color:#fff;background:rgba(255,255,255,0.12);font-weight:600;}
 @media(max-width:640px){.site-nav{padding:8px 16px;gap:10px;}.site-nav-links a{padding:4px 8px;font-size:12px;}.site-nav-sep{display:none;}}
 @media print{.site-nav{display:none;}}
+.tab-nav{background:var(--white,#fff)!important;border:1px solid var(--border,#d8d4cc)!important;border-radius:8px!important;padding:6px!important;gap:4px!important;border-bottom:none!important;}
+.tab-btn{border-radius:6px!important;border-bottom:none!important;margin-bottom:0!important;padding:10px 18px!important;}
+.tab-btn:hover{background:rgba(0,0,0,0.05)!important;}
+.tab-btn.active{background:var(--charcoal,#1a1a1a)!important;color:#fff!important;border-bottom-color:transparent!important;}
 </style>
 <nav class="site-nav">
 <a href="/" class="site-nav-home">&larr; Home</a>
@@ -127,7 +131,7 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
 
 <div class="header">
   <div class="badge">AI JOB EXPOSURE — PORTFOLIO CONTRAST MAP</div>
-  <h1>ASX AI Exposure Portfolio: 6-Company Contrast Set</h1>
+  <h1>ASX AI Exposure Portfolio: 5-Company Contrast Set</h1>
   <p>Maximum spread across the Bits / Atoms / Institutional / Cognitive constraint surface — designed to illustrate the full range of generative AI executive exposure across Australian listed companies.</p>
 </div>
 
@@ -142,7 +146,7 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
 
   <div class="grid">
 
-    <div class="co anchor full">
+    <a href="/genusplus" class="co anchor full" style="text-decoration:none;color:inherit;display:block;">
       <span class="badge-tag b-atoms">Atoms-dominant</span>
       <h3>GenusPlus Group</h3>
       <p class="ticker">ASX: GNP &middot; A$751M rev &middot; Power &amp; comms infrastructure</p>
@@ -154,9 +158,9 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
         <span style="width:33%;background:var(--quad-hf);"></span>
       </div>
       <div class="stats"><span>AN: 4.0%</span><span>AUG: 60.0%</span><span>CONV: 2.9%</span><span>HF: 33.1%</span><span>HC: 0.90x</span></div>
-    </div>
+    </a>
 
-    <div class="co">
+    <a href="/wisetech" class="co" style="text-decoration:none;color:inherit;display:block;">
       <span class="badge-tag b-bits">Bits-dominant</span>
       <h3>WiseTech Global</h3>
       <p class="ticker">ASX: WTC &middot; ~A$1.5B rev &middot; Logistics SaaS</p>
@@ -168,9 +172,9 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
         <span style="width:20%;background:var(--quad-hf);"></span>
       </div>
       <div class="stats"><span>AN: ~40%</span><span>AUG: ~30%</span><span>CONV: ~10%</span><span>HF: ~20%</span><span>HC: ~0.68x</span></div>
-    </div>
+    </a>
 
-    <div class="co">
+    <a href="/seek" class="co" style="text-decoration:none;color:inherit;display:block;">
       <span class="badge-tag b-cog">Cognitive-dominant</span>
       <h3>SEEK Limited</h3>
       <p class="ticker">ASX: SEK &middot; ~A$1.1B rev &middot; Employment marketplace</p>
@@ -182,9 +186,9 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
         <span style="width:26%;background:var(--quad-hf);"></span>
       </div>
       <div class="stats"><span>AN: ~28%</span><span>AUG: ~38%</span><span>CONV: ~8%</span><span>HF: ~26%</span><span>HC: ~0.75x</span></div>
-    </div>
+    </a>
 
-    <div class="co">
+    <a href="/kellypartners" class="co" style="text-decoration:none;color:inherit;display:block;">
       <span class="badge-tag b-inst">Institutional-dominant</span>
       <h3>Kelly Partners Group</h3>
       <p class="ticker">ASX: KPG &middot; ~A$180M rev &middot; Accounting roll-up</p>
@@ -196,9 +200,9 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
         <span style="width:25%;background:var(--quad-hf);"></span>
       </div>
       <div class="stats"><span>AN: ~22%</span><span>AUG: ~48%</span><span>CONV: ~5%</span><span>HF: ~25%</span><span>HC: ~0.78x</span></div>
-    </div>
+    </a>
 
-    <div class="co">
+    <a href="/csl" class="co" style="text-decoration:none;color:inherit;display:block;">
       <span class="badge-tag b-atoms">Atoms + Institutional</span>
       <h3>CSL Limited</h3>
       <p class="ticker">ASX: CSL &middot; ~US$14B rev &middot; Biotech / plasma</p>
@@ -210,21 +214,7 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
         <span style="width:42%;background:var(--quad-hf);"></span>
       </div>
       <div class="stats"><span>AN: ~12%</span><span>AUG: ~42%</span><span>CONV: ~4%</span><span>HF: ~42%</span><span>HC: ~0.88x</span></div>
-    </div>
-
-    <div class="co">
-      <span class="badge-tag b-bits">Bits + Cognitive</span>
-      <h3>Xero Limited</h3>
-      <p class="ticker">ASX: XRO &middot; ~A$2.1B rev &middot; Cloud accounting SaaS</p>
-      <p class="desc">Bits+Cognitive contrast. Product is pure software serving 4M+ SME subscribers — but the moat is the ecosystem lock-in and the partner accountant network, which is a relationship asset, not a code asset. Engineering tasks are highly automatable (WiseTech-like) but product strategy and ecosystem management are Cognitive fortress. High deskilling profile: AI eats the engineering, leaves the strategy.</p>
-      <div class="bar">
-        <span style="width:32%;background:var(--quad-an);"></span>
-        <span style="width:35%;background:var(--quad-aug);"></span>
-        <span style="width:8%;background:var(--quad-conv);"></span>
-        <span style="width:25%;background:var(--quad-hf);"></span>
-      </div>
-      <div class="stats"><span>AN: ~32%</span><span>AUG: ~35%</span><span>CONV: ~8%</span><span>HF: ~25%</span><span>HC: ~0.72x</span></div>
-    </div>
+    </a>
 
   </div>
 
@@ -232,7 +222,7 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
 
   <div class="callout">
     <h4>Constraint Ontology: Bits / Atoms / Institutional / Cognitive</h4>
-    <p>The portfolio is constructed to place one company in each primary constraint quadrant, with two hybrid positions (CSL = Atoms+Institutional, Xero = Bits+Cognitive) that demonstrate how real companies sit on the constraint surface rather than at its poles. GenusPlus anchors the Atoms pole. WiseTech anchors the Bits pole. Kelly Partners anchors the Institutional pole. SEEK anchors the Cognitive pole. The result is maximum visual contrast when the quadrant distribution bars are displayed side by side.</p>
+    <p>The portfolio is constructed to place one company in each primary constraint quadrant, with CSL (Atoms+Institutional) demonstrating how real companies sit on the constraint surface rather than at its poles. GenusPlus anchors the Atoms pole. WiseTech anchors the Bits pole. Kelly Partners anchors the Institutional pole. SEEK anchors the Cognitive pole. The result is maximum visual contrast when the quadrant distribution bars are displayed side by side.</p>
   </div>
 
   <div class="rationale">
@@ -257,7 +247,7 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--ivory); colo
 
   <div class="callout">
     <h4>Portfolio Reading Order</h4>
-    <p>For maximum narrative impact, present the portfolio in this sequence: GenusPlus (anchor, lowest exposure) → CSL (similar shape, different sector) → Kelly Partners (Institutional cliff) → SEEK (Cognitive split) → Xero (Bits emerging) → WiseTech (Bits proven, cuts announced). This walks the audience from "AI can't touch us" to "AI is already restructuring headcount" in six steps.</p>
+    <p>For maximum narrative impact, present the portfolio in this sequence: GenusPlus (anchor, lowest exposure) → CSL (similar shape, different sector) → Kelly Partners (Institutional cliff) → SEEK (Cognitive split) → WiseTech (Bits proven, cuts announced). This walks the audience from "AI can't touch us" to "AI is already restructuring headcount" in five steps.</p>
   </div>
 
   <div class="footer">

@@ -127,6 +127,10 @@ tr:hover td{background:rgba(220,38,38,0.03);}
 .site-nav-links a.active{color:#fff;background:rgba(255,255,255,0.12);font-weight:600;}
 @media(max-width:640px){.site-nav{padding:8px 16px;gap:10px;}.site-nav-links a{padding:4px 8px;font-size:12px;}.site-nav-sep{display:none;}}
 @media print{.site-nav{display:none;}}
+.tab-nav{background:var(--white,#fff)!important;border:1px solid var(--border,#d8d4cc)!important;border-radius:8px!important;padding:6px!important;gap:4px!important;border-bottom:none!important;}
+.tab-btn{border-radius:6px!important;border-bottom:none!important;margin-bottom:0!important;padding:10px 18px!important;}
+.tab-btn:hover{background:rgba(0,0,0,0.05)!important;}
+.tab-btn.active{background:var(--charcoal,#1a1a1a)!important;color:#fff!important;border-bottom-color:transparent!important;}
 </style>
 <nav class="site-nav">
 <a href="/" class="site-nav-home">&larr; Home</a>
@@ -206,7 +210,7 @@ tr:hover td{background:rgba(220,38,38,0.03);}
       <p>Paul Kuchta and Ada Poon — both practising Chartered Accountants and Executive Directors — show 0% Automate Now and 75%/60% Augment respectively. AI can prepare a client's entire tax return, BAS, and SMSF compliance pack. But the moment someone clicks "lodge" with the ATO, a licensed professional must have verified the output. This is not a technology problem — it's a regulatory architecture problem. Until the ATO and ASIC create frameworks for AI-verified compliance (as APRA has begun exploring for banking), the Human Fortress in professional services is defined by statute, not by capability.</p>
     </div>
     <h3 class="sub-title">Exposure by Role</h3>
-    <div class="chart-container wide"><canvas id="exposureHeatChart" height="280"></canvas></div>
+    <div class="chart-container wide"><canvas id="exposureHeatChart" height="180"></canvas></div>
     <h3 class="sub-title">Group Quadrant Distribution</h3>
     <div class="chart-container" style="max-width:400px;"><canvas id="groupPieChart" height="300"></canvas></div>
     <div class="callout success">
